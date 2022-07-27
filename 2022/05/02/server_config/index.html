@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="zh-CN" color-mode="light">
 
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="keywords" content="" />
-  <meta name="author" content="John Doe" />
+  <meta name="author" content="ltt_rick" />
   <meta name="description" content="" />
   
   
@@ -16,7 +16,7 @@
       
       |
     
-     Hexo
+     lttBlog
   </title>
 
   
@@ -150,7 +150,7 @@
       <div class="post-title">实验室深度学习服务器搭建过程</div>
       <div class="post-attach">
         <span class="post-pubtime">
-          <i class="iconfont icon-updatetime" title="Update time"></i>
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
           2022-05-02 14:16:20
         </span>
         
@@ -172,7 +172,7 @@
 </li>
 </ol>
 <p>服务器来的那天我印象挺深刻，那天下午导师突然发微信跟我说服务器已经送到校门口了，但是疫情原因进不来学校，让我叫上我同门一起去学校门口，把服务器搬回来,这个大块头真的好重。</p>
-<p><img src="/server_config/1.jpg"></p>
+<p><img src="/.io//1.jpg"></p>
 <h2 id="硬件选择"><a href="#硬件选择" class="headerlink" title="硬件选择"></a>硬件选择</h2><p>采购的服务器最终配置如下：</p>
 <ul>
 <li>CPU: Intel(R) Xeon(R) Gold 5218R CPU @ 2.10GHz X 2</li>
@@ -206,7 +206,7 @@
 <li><p>制作系统盘：Windows下使用UltraISO工具打开.iso镜像文件，并将其写入到一个U盘，得到系统启动盘。</p>
 </li>
 </ol>
-<p><img src="/server_config/2.png"></p>
+<p><img src="/.io//2.png"></p>
 <ol start="3">
 <li><p>将U盘插到服务器上,开机按F1键进入BIOS（具体什么键跟主板型号有关），修改启动顺序为从U盘启动，然后跟着安装向导一步一步安装，配置都可以使用默认的，用户名和密码改成你想要的就可以了。默认语言最好选英文，免得以后出现不必要的麻烦。</p>
 </li>
@@ -290,7 +290,7 @@
 <li>lxd 初始化</li>
 </ol>
 <p>输入命令<code>sudo lxd init</code>进行配置，选项如下图：</p>
-<p><img src="/server_config/4.png"></p>
+<p><img src="/.io//4.png"></p>
 <ul>
 <li>LXD Clustering：no，不需要</li>
 <li>new storage pool：yes，需要创建一个存储池</li>
@@ -392,7 +392,7 @@
     <i class="iconfont icon-catalog"></i>
   </div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
+    <div class="title">目录</div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="toc-text">硬件选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F"><span class="toc-text">系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ubuntu-20-04-LTS"><span class="toc-text">安装Ubuntu 20.04 LTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E8%BD%AF%E4%BB%B6%E6%BA%90"><span class="toc-text">配置国内镜像软件源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AESSH"><span class="toc-text">配置SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lxc%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">Lxc容器配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Nvidia%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="toc-text">安装Nvidia显卡驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LXD-x2F-ZFS-%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="toc-text">LXD&#x2F;ZFS 安装及配置</span></a></li></ol></li></ol>

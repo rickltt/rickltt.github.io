@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="zh-CN" color-mode="light">
 
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="keywords" content="" />
-  <meta name="author" content="John Doe" />
+  <meta name="author" content="ltt_rick" />
   <meta name="description" content="" />
   
   
@@ -16,7 +16,7 @@
       
       |
     
-     Hexo
+     lttBlog
   </title>
 
   
@@ -150,7 +150,7 @@
       <div class="post-title">hexo和gitee搭建个人博客教程</div>
       <div class="post-attach">
         <span class="post-pubtime">
-          <i class="iconfont icon-updatetime" title="Update time"></i>
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
           2022-05-05 19:24:45
         </span>
         
@@ -206,7 +206,7 @@
 <p>更多参数可运行 man ssh-keygen</p>
 </blockquote>
 <p>使用ssh-keygen命令，连续三下回车后，<code>~/.ssh</code>文件夹下<code>id_rsa.pub</code>文件，复制其中的内容，打开你的githee主页，右上角进入设置 -&gt; SSH公钥，将刚复制的内容粘贴到公钥那里，标题随便填，填完点击确定。</p>
-<p><img src="/hexo-teach/2.png"></p>
+<p><img src="/.io//2.png"></p>
 <p>在终端中输入：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@gitee.com  <span class="comment">#注意，&#x27;T&#x27;是大写的</span></span><br></pre></td></tr></table></figure>
 
@@ -230,7 +230,7 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span> <span class="comment">#原来是false，这里你需要把它改成true</span></span><br></pre></td></tr></table></figure>
 
 <p>接着进入<code>node_modules/hexo-asset-image</code>路径下，用vim打开<code>index.js</code>文件,从第56行开始修改一下</p>
-<p><img src="/hexo-teach/1.png" alt="图片路径配置"></p>
+<p><img src="/.io//1.png" alt="图片路径配置"></p>
 <ol start="3">
 <li>配置emoji表情</li>
 </ol>
@@ -253,7 +253,7 @@
 <li><p>以后如果你的博客（个人网站）的内容有改动，只需在GiteePages服务页面点击更新即可。</p>
 </li>
 </ol>
-<p><img src="/hexo-teach/3.png"></p>
+<p><img src="/.io//3.png"></p>
 <h2 id="使用hexo写博客"><a href="#使用hexo写博客" class="headerlink" title="使用hexo写博客"></a>使用hexo写博客</h2><p>markdown的源文件在<code>blog/soruce/_posts</code>下，你可以进行编辑，开始愉快的markdown写作。</p>
 <p>如果要创建一个新的markdown文件，执行下面的命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page </span><br></pre></td></tr></table></figure>
@@ -270,7 +270,7 @@
     <i class="iconfont icon-catalog"></i>
   </div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
+    <div class="title">目录</div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA"><span class="toc-text">搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%8C%E4%BD%BF%E7%94%A8npm%E5%AE%89%E8%A3%85hexo"><span class="toc-text">第一步，使用npm安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">第二步，初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%8C%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-text">第三步，主题配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%8C%E5%88%9B%E5%BB%BAgitee%E4%BB%93%E5%BA%93"><span class="toc-text">第四步，创建gitee仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%8C%E9%85%8D%E7%BD%AESSH-key"><span class="toc-text">第五步，配置SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%8Chexo%E9%85%8D%E7%BD%AE"><span class="toc-text">第六步，hexo配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5%EF%BC%8C-%E6%8E%A8%E9%80%81%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E8%BF%9C%E7%A8%8Bgitee%E4%BB%93%E5%BA%93"><span class="toc-text">第七步， 推送资源文件到远程gitee仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E6%AD%A5%EF%BC%8C%E5%BC%80%E5%90%AFgitee-pages"><span class="toc-text">第八步，开启gitee pages</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8hexo%E5%86%99%E5%8D%9A%E5%AE%A2"><span class="toc-text">使用hexo写博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">hexo常用命令</span></a></li></ol>
