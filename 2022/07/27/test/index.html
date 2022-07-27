@@ -81,15 +81,15 @@
     <ul>
       
         <li class="nav-item" data-path="/">
-          <a href="/">Home</a>
+          <a href="/">主页</a>
         </li>
       
         <li class="nav-item" data-path="/archives/">
-          <a href="/archives/">Archives</a>
+          <a href="/archives/">归档</a>
         </li>
       
         <li class="nav-item" data-path="/about/">
-          <a href="/about/">About</a>
+          <a href="/about/">关于</a>
         </li>
       
     </ul>
@@ -156,11 +156,110 @@
         
       </div>
       <div class="markdown-body">
-        
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>我们实验室的人写科研文章一般用LaTeX，但是相对于Word，传统LaTeX在”多人合作”与”追踪修改”上有很大的缺陷。一个很好的解决办法是使用在线LaTeX编辑器，如<a href="https://link.zhihu.com/?target=https://www.overleaf.com/">Overleaf</a>或者<a href="https://link.zhihu.com/?target=https://www.sharelatex.com/">ShareLaTeX</a>。可惜这些在线LaTeX编辑器的免费版本有诸多限制（如：只能有一个合作者）。幸运的是，ShareLaTex有<a href="https://link.zhihu.com/?target=https://github.com/sharelatex/sharelatex">开源版本</a>。于是，我们决定在实验室内部服务器上部署ShareLaTeX。</p>
+<h2 id="服务器操作系统"><a href="#服务器操作系统" class="headerlink" title="服务器操作系统"></a>服务器操作系统</h2><p>Ubuntu 20.04</p>
+<h2 id="安装docker和docker-compose"><a href="#安装docker和docker-compose" class="headerlink" title="安装docker和docker-compose"></a>安装docker和docker-compose</h2><h2 id="下载sharelatex镜像"><a href="#下载sharelatex镜像" class="headerlink" title="下载sharelatex镜像"></a>下载sharelatex镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull sharelatex:2.6.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="基于docker-compose部署sharelatex"><a href="#基于docker-compose部署sharelatex" class="headerlink" title="基于docker-compose部署sharelatex"></a>基于docker-compose部署sharelatex</h2><ol>
+<li>我们需要把ShareLaTeX及数据库数据文件夹建立好。在此，我们假设数据会放在home目录下；如需更改，只需将下面步骤中的<code>~</code>换成相应的目录即可。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> sharelatex</span><br><span class="line"><span class="built_in">cd</span> sharelatex</span><br><span class="line"><span class="built_in">mkdir</span> sharelatex_data</span><br><span class="line"><span class="built_in">mkdir</span> mongo_data</span><br><span class="line"><span class="built_in">mkdir</span> redis_data</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>下载<a href="https://link.zhihu.com/?target=https://raw.githubusercontent.com/sharelatex/sharelatex/master/docker-compose.yml">docker-compose.yml</a>,并存在<code>~/sharelatex/</code>目录下。</p>
+</li>
+<li><p>修改docker-compose.yml文件</p>
+<ul>
+<li><p><code>ports:</code>改成<code>xxxx:80</code>,xxxx是端口号，你自己设置，这里主要是进行端口转发，将容器内的80端口转发到服务器的xxxx端口上。</p>
+</li>
+<li><p>替换对应的<code>~</code>为相应的目录（sharelatex、redis和mongo）</p>
+</li>
+<li><p><code>image:</code>改为<code>sharelatex:2.6.1</code></p>
+</li>
+<li><p>设置为中文，<code>environment:</code>下面添加<code>SHARELATEX_SITE_LANGUAGE: &#39;zh-CN&#39; </code></p>
+</li>
+<li><p><code>SHARELATEX_APP_NAME:</code>可以改成你想要的名称</p>
+</li>
+<li><p>修改管理员的邮箱</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SHARELATEX_SITE_URL: <span class="comment">#你部署的服务器域名或IP</span></span><br><span class="line">SHARELATEX_EMAIL_FROM_ADDRESS: <span class="comment">#管理员的邮箱</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_HOST: smtp.qq.com <span class="comment">#smtp服务，你可以用qq的，也可以用别的</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_PORT: 465 <span class="comment">#qq邮箱的smtp服务端口号，具体情况取决于你用的stmp服务的端口号</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_SECURE: <span class="string">&quot;true&quot;</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_USER: <span class="string">&quot;xxxxxxx@qq.com&quot;</span> <span class="comment">#设置管理员邮箱</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_PASS: <span class="string">&quot;dchvwlxrexdybfag&quot;</span> <span class="comment">#smtp服务的密码</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_TLS_REJECT_UNAUTH: <span class="string">&quot;false&quot;</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_IGNORE_TLS: <span class="string">&quot;true&quot;</span></span><br><span class="line">SHARELATEX_EMAIL_SMTP_LOGGER: <span class="string">&quot;true&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li><p>安装sharelatex</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker-compose up -d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建管理员账号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># joe@example.com 改为你要设置的管理员邮箱</span></span><br><span class="line">sudo docker <span class="built_in">exec</span> sharelatex /bin/bash -c <span class="string">&quot;cd /var/www/sharelatex; grunt user:create-admin --email=joe@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>容器配置</p>
+</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入sharelatex 容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it sharelatex bash</span><br><span class="line"><span class="comment"># 下载 update-tlmgr-latest.sh ,国内有很多镜像，可以自己上网搜</span></span><br><span class="line">wget https://mirrors4.tuna.tsinghua.edu.cn/ctan/systems/texlive/tlnet/update-tlmgr-latest.sh</span><br><span class="line"><span class="comment"># 运行脚本</span></span><br><span class="line">sh update-tlmgr-latest.sh -- --upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级tlmgr</span></span><br><span class="line">tlmgr update --self --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完整版texlive（漫长的等待，不要让shell断开）</span></span><br><span class="line">tlmgr install scheme-full</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出sharelatex容器，并重启sharelatex容器</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">docker restart sharelatex</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>配置中文字体</li>
+</ol>
+<ul>
+<li>将Windows字体库（即目录C:\windows\fonts）压缩为winfonts.zip，并上传到服务器。</li>
+<li>将fonts.zip复制到sharelatex容器中：<code>docker cp winfonts.zip sharelatex:/</code></li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器的命令行界面</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it sharelatex bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过安装wqy字体同时安装xfont工具</span></span><br><span class="line">$ apt-get install xfonts-wqy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压winfonts.zip，并剪切到系统字体目录下</span></span><br><span class="line">unzip winfonts.zip -d /usr/share/fonts/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入字体目录安装字体</span></span><br><span class="line"><span class="built_in">cd</span> /usr/share/fonts/winfonts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除其中的.fon字体文件（该种格式文件在后面建立字体目录时会报错），只保留TrueType和OpenType字体，即.ttf和.otf</span></span><br><span class="line"><span class="built_in">rm</span> -r *.fon</span><br><span class="line"></span><br><span class="line">mkfontscale</span><br><span class="line">mkfontdir</span><br><span class="line">fc-cache -fv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查确认中文字体安装成功</span></span><br><span class="line">fc-list :lang=zh-cn</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="配置自助邮箱注册"><a href="#配置自助邮箱注册" class="headerlink" title="配置自助邮箱注册"></a>配置自助邮箱注册</h2><p>由于Overleaf对社区版的限制（可能是为了推销Server Pro），社区版的Overleaf默认不支持注册，进入注册页面之后只能看到一个<code>please contact mail@example.com to create an account.</code>的提示。但是管理员是可以通过网页操作帮助用户创建账户的，因此我们可以用为管理员提供的用户注册界面魔改一个面向用户的注册界面。</p>
+<h3 id="修改router-js"><a href="#修改router-js" class="headerlink" title="修改router.js"></a>修改<code>router.js</code></h3><p>Overleaf的后端是用Node.js写的，因此首先观察<code>/var/www/sharelatex/web/app/src/router.js</code>（<a target="_blank" rel="noopener" href="https://github.com/overleaf/web/blob/master/app/src/router.js#L929-L939%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%8F%91%E7%8E%B0%E7%BB%99%E7%AE%A1%E7%90%86%E5%91%98%E7%94%A8%E7%9A%84%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2%E6%98%AF%E9%80%9A%E8%BF%87POST">https://github.com/overleaf/web/blob/master/app/src/router.js#L929-L939），可以发现给管理员用的注册页面是通过POST</a> <code>/admin/register</code>来实现注册的。因此我们在下面添加一个专门用于给用户注册的router，以及给这个router加上白名单（让未注册用户也能访问）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> webRouter.post(</span><br><span class="line">   &#x27;/self-register&#x27;,</span><br><span class="line">   UserController.register_public</span><br><span class="line"> )</span><br><span class="line"> webRouter.get(</span><br><span class="line">   &#x27;/self-register&#x27;,</span><br><span class="line">   UserPagesController.registerPage</span><br><span class="line"> )</span><br><span class="line">AuthenticationController.addEndpointToLoginWhitelist(&#x27;/self-register&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改注册函数"><a href="#修改注册函数" class="headerlink" title="修改注册函数"></a>修改注册函数</h3><p>之后我们可以找到<code>UserController.register</code>这个函数的位置<code>/var/www/sharelatex/web/app/src/Features/User/UserController.js</code> (<a target="_blank" rel="noopener" href="https://github.com/overleaf/web/blob/master/app/src/Features/User/UserController.js#L459)%EF%BC%8C%E5%9C%A8%E8%BF%99%E4%B8%AA%E5%87%BD%E6%95%B0%E4%B8%8B%E9%9D%A2%E6%96%B0%E5%A2%9E%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BA%8E%E8%87%AA%E5%8A%A9%E6%B3%A8%E5%86%8C%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9A">https://github.com/overleaf/web/blob/master/app/src/Features/User/UserController.js#L459)，在这个函数下面新增一个用于自助注册的函数：</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">register_public(req, res, next) &#123;</span><br><span class="line">  const &#123; email &#125; = req.body</span><br><span class="line">  valid_edu = (/edu.cn\s*$/.test(email))</span><br><span class="line">  if (email == null || email === &#x27;&#x27; || !valid_edu) &#123;</span><br><span class="line">    return res.sendStatus(422) // Unprocessable Entity</span><br><span class="line">  &#125;</span><br><span class="line">  UserRegistrationHandler.registerNewUserAndSendActivationEmail(</span><br><span class="line">    email,</span><br><span class="line">    (error, user, setNewPasswordUrl) =&gt; &#123;</span><br><span class="line">      if (error != null) &#123;</span><br><span class="line">        return next(error)</span><br><span class="line">      &#125;</span><br><span class="line">      setNewPasswordUrl = &quot;Please check your inbox.&quot;</span><br><span class="line">      res.json(&#123;</span><br><span class="line">        email: user.email,</span><br><span class="line">        setNewPasswordUrl</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>由于我们可能只希望学校内部的人员可以注册，因此我们可以在邮箱格式判断上再加一条判断邮箱后缀或域名的规则（见上）。另外，在自助注册时，我们只希望用户从邮件中看到验证链接，而不能直接看到验证链接，因此我们需要把变量<code>setNewPasswordUrl</code>，设置成如“请检查收件箱”这样的提示语。</p>
+<h3 id="修改前端函数"><a href="#修改前端函数" class="headerlink" title="修改前端函数"></a>修改前端函数</h3><p>我们还需要修改前端的函数，以便前端网页能够直接向我们在<code>router.js</code>里面写的注册url 发送数据。</p>
+<p>修改<code>/var/www/sharelatex/web/frontend/js/main/register-users.js</code> (<a target="_blank" rel="noopener" href="https://github.com/overleaf/web/blob/master/frontend/js/main/register-users.js#L32)%EF%BC%8C%E5%9C%A8%60registerUsers()%60%E4%B8%8B%E9%9D%A2%E5%86%8D%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%60registerUsers_pub()%60%E5%87%BD%E6%95%B0%E7%94%A8%E4%BA%8E%E8%87%AA%E5%8A%A9%E6%B3%A8%E5%86%8C%E3%80%82">https://github.com/overleaf/web/blob/master/frontend/js/main/register-users.js#L32)，在`registerUsers()`下面再新建一个`registerUsers_pub()`函数用于自助注册。</a></p>
+<p>添加完之后的完整return如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">  return ($scope.registerUsers = function() &#123;</span><br><span class="line">    const emails = parseEmails($scope.inputs.emails)</span><br><span class="line">    $scope.error = false</span><br><span class="line">    return Array.from(emails).map(email =&gt;</span><br><span class="line">      queuedHttp</span><br><span class="line">        .post(&#x27;/admin/register&#x27;, &#123;</span><br><span class="line">          email,</span><br><span class="line">          _csrf: window.csrfToken</span><br><span class="line">        &#125;)</span><br><span class="line">        .then(function(response) &#123;</span><br><span class="line">          const &#123; data &#125; = response</span><br><span class="line">          const user = data</span><br><span class="line">          $scope.users.push(user)</span><br><span class="line">          return ($scope.inputs.emails = &#x27;&#x27;)</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(() =&gt; ($scope.error = true))</span><br><span class="line">    )</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">$scope.registerUsers_pub = function() &#123;</span><br><span class="line">const emails = parseEmails($scope.inputs.emails)</span><br><span class="line">$scope.error = false</span><br><span class="line">return Array.from(emails).map(email =&gt;</span><br><span class="line">  queuedHttp</span><br><span class="line">    .post(&#x27;/self-register&#x27;, &#123;</span><br><span class="line">      email,</span><br><span class="line">      _csrf: window.csrfToken</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(function(response) &#123;</span><br><span class="line">      const &#123; data &#125; = response</span><br><span class="line">      const user = data</span><br><span class="line">      $scope.users.push(user)</span><br><span class="line">      return ($scope.inputs.emails = &#x27;&#x27;)</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(() =&gt; ($scope.error = true))</span><br><span class="line">)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="重新编译前端"><a href="#重新编译前端" class="headerlink" title="重新编译前端"></a>重新编译前端</h3><p>在<code>/var/www/sharelatex/web/</code>下运行<code>npm run webpack:production</code></p>
+<p>(如果webpack报错，很有可能是npm的版本太低，使用<code>npm install -g npm</code>更新npm，随后执行<code>npm i</code>再执行webpack命令即可)</p>
+<p>随后修改<code>/var/www/sharelatex/web/app/views/user/register.pug</code>，将它改成和<code>/var/www/sharelatex/web/app/views/admin/register.pug</code>类似的结构（注意需修改注册使用的POST函数为刚刚新建的<code>registerUsers_pub()</code> ）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">extends ../layout</span><br><span class="line"></span><br><span class="line">block content</span><br><span class="line">	.content.content-alt</span><br><span class="line">		.container</span><br><span class="line">			.row</span><br><span class="line">				.col-md-12</span><br><span class="line">					.card(ng-controller=&quot;RegisterUsersController&quot;)</span><br><span class="line">						.page-header</span><br><span class="line">							h1 Register New Users</span><br><span class="line">						.row-spaced.ng-cloak</span><br><span class="line">							p This page only allows email ends with edu.cn to register.</span><br><span class="line">							p If you use other email address ends with other domain, please contact service@cra.moe .</span><br><span class="line">						form.form</span><br><span class="line">							.row</span><br><span class="line">								.col-md-4.col-xs-8</span><br><span class="line">									input.form-control(</span><br><span class="line">									name=&quot;email&quot;,</span><br><span class="line">									type=&quot;text&quot;,</span><br><span class="line">									placeholder=&quot;jane@example.com, joe@example.com&quot;,</span><br><span class="line">									ng-model=&quot;inputs.emails&quot;,</span><br><span class="line">									on-enter=&quot;registerUsers_pub()&quot;</span><br><span class="line">								)</span><br><span class="line">								.col-md-8.col-xs-4</span><br><span class="line">									button.btn.btn-primary(ng-click=&quot;registerUsers_pub()&quot;) #&#123;translate(&quot;register&quot;)&#125;</span><br><span class="line">									</span><br><span class="line">						.row-spaced(ng-show=&quot;error&quot;).ng-cloak.text-danger</span><br><span class="line">							p Sorry, an error occured, check your email address or contact service@cra.moe.</span><br><span class="line">						</span><br><span class="line">						.row-spaced(ng-show=&quot;users.length &gt; 0&quot;).ng-cloak.text-success</span><br><span class="line">							p We&#x27;ve sent out welcome emails to the registered users.</span><br><span class="line">							p This page only allows email ends with edu.cn to register.</span><br><span class="line">							p If you use other email address ends with other domain, please contact service@cra.moe .</span><br><span class="line">							p (Password reset tokens will expire after one week and the user will need registering again).</span><br><span class="line"></span><br><span class="line">						hr(ng-show=&quot;users.length &gt; 0&quot;).ng-cloak</span><br><span class="line">						table(ng-show=&quot;users.length &gt; 0&quot;).table.table-striped.ng-cloak</span><br><span class="line">							tr</span><br><span class="line">								th #&#123;translate(&quot;email&quot;)&#125;</span><br><span class="line">								th Set Password Url</span><br><span class="line">							tr(ng-repeat=&quot;user in users&quot;)</span><br><span class="line">								td &#123;&#123; user.email &#125;&#125;</span><br><span class="line">								td(style=&quot;word-break: break-all;&quot;) &#123;&#123; user.setNewPasswordUrl &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后退出shell，然后使用<code>docker restart sharelatex</code>重启container之后，上述功能就会被应用了。</p>
+<h2 id="保存配置好的docker镜像"><a href="#保存配置好的docker镜像" class="headerlink" title="保存配置好的docker镜像"></a>保存配置好的docker镜像</h2><p><code>docker exec</code> 命令对 Docker 容器的更改是暂时的。如果用 Docker Compose 重新创建容器，之前所做的更改（安装完整的 LATEX）将会丢失。因此，可以使用 <code>docker commit</code> 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit sharelatex sharelatex/sharelatex:with-texlive-full</span><br></pre></td></tr></table></figure>
+
+<p>然后编辑 <code>docker-compose.yml</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>找到镜像设置，并且更改为：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="attr">sharelatex:</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">sharelatex/sharelatex:with-texlive-full</span></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="本文主要参考了以下博客"><a href="#本文主要参考了以下博客" class="headerlink" title="本文主要参考了以下博客"></a>本文主要参考了以下博客</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://sparktour.me/2021/04/02/self-host-overleaf/">https://sparktour.me/2021/04/02/self-host-overleaf/</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54088512">https://zhuanlan.zhihu.com/p/54088512</a></li>
+<li><a target="_blank" rel="noopener" href="https://bowenei.gitee.io/post/overleaf-server-deployment/">https://bowenei.gitee.io/post/overleaf-server-deployment/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/overleaf/overleaf/wiki/Quick-Start-Guide">https://github.com/overleaf/overleaf/wiki/Quick-Start-Guide</a></li>
+</ul>
+
       </div>
       
     </div>
     
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">服务器操作系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85docker%E5%92%8Cdocker-compose"><span class="toc-text">安装docker和docker-compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsharelatex%E9%95%9C%E5%83%8F"><span class="toc-text">下载sharelatex镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8Edocker-compose%E9%83%A8%E7%BD%B2sharelatex"><span class="toc-text">基于docker-compose部署sharelatex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A9%E9%82%AE%E7%AE%B1%E6%B3%A8%E5%86%8C"><span class="toc-text">配置自助邮箱注册</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9router-js"><span class="toc-text">修改router.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E5%87%BD%E6%95%B0"><span class="toc-text">修改注册函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%89%8D%E7%AB%AF%E5%87%BD%E6%95%B0"><span class="toc-text">修改前端函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E7%BC%96%E8%AF%91%E5%89%8D%E7%AB%AF"><span class="toc-text">重新编译前端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E9%85%8D%E7%BD%AE%E5%A5%BD%E7%9A%84docker%E9%95%9C%E5%83%8F"><span class="toc-text">保存配置好的docker镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E4%B8%BB%E8%A6%81%E5%8F%82%E8%80%83%E4%BA%86%E4%BB%A5%E4%B8%8B%E5%8D%9A%E5%AE%A2"><span class="toc-text">本文主要参考了以下博客</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
 
     
   </div>
@@ -178,6 +277,18 @@
         </li>
       
         <li>
+          <a title="email" href="mailto:ltt_rick@163.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="rick.jpg">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
           <a title="weibo" target="_blank" rel="noopener" href="https://weibo.com/u/5444259408">
             <i class="iconfont icon-weibo"></i>
           </a>
@@ -190,13 +301,6 @@
     <div class="footer-more">
       
         <a target="_blank" rel="noopener" href="https://github.com/rickltt">Copyright © 2022 rickltt</a>
-        
-    </div>
-  
-    
-    <div class="footer-more">
-      
-        <a target="_blank" rel="noopener" href="https://github.com/rickltt">Theme by rickltt | Powered by Hexo</a>
         
     </div>
   
