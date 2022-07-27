@@ -207,12 +207,14 @@
 <h2 id="cuda版本不一致？"><a href="#cuda版本不一致？" class="headerlink" title="cuda版本不一致？"></a>cuda版本不一致？</h2><p>你可能会发现使用<code>nvcc -V</code>和<code>nvidia-smi</code>查看cuda版本号不一致，这是什么原因呢？</p>
 <p>这里先简单介绍一下两者，nvcc是cuda的编译器，通过CUDA Toolkit进行安装，可以从CUDA Toolkit的&#x2F;bin目录中获取,类似于gcc就是c语言的编译器。由于程序是要经过编译器编程成可执行的二进制文件，而cuda程序有两种代码，一种是运行在cpu上的host代码，一种是运行在gpu上的device代码，我们使用<code>nvcc -V</code>的时候显示的是cuda版本对应的runtime api（运行时）。<code>nvidia-smi</code>是<strong>NVIDIA System Management Interface</strong> ，属于一种命令行工具，它是通过nvidia drivers安装，对应的是driver api。</p>
 <p>通常，driver api的版本能向下兼容runtime pai版本，所以一般<code>nvidia-smi</code>显示的cuda版本大于<code>nvcc -V</code>显示的cuda版本。反之则不行。</p>
-<p><img src="/.io//1.png"></p>
+<img src="/2022/05/06/nvidia-smi/1.png" class="">
+
 <h2 id="pytorch-应该装什么版本的cuda-？"><a href="#pytorch-应该装什么版本的cuda-？" class="headerlink" title="pytorch 应该装什么版本的cuda ？"></a>pytorch 应该装什么版本的cuda ？</h2><p>在pytorch官网使用pip下载的时候需要指定cuda版本，我们应该选择与<code>nvcc -V</code>对应的cuda版本安装pytorch，只要大版本对应即可。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==1.7.0+cu110 torchvision==0.8.1+cu110 -f https://download.pytorch.org/whl/torch_stable.html</span><br></pre></td></tr></table></figure>
 
 <p>比如说，你不知道该下什么cuda版本的pytorch，你随便输入一个版本，但是没找到，终端就会给你提示，你可以从下面找到你想要装的版本。只要你下载的pytorch cuda大版本与<code>nvcc -V</code>显示的相对应就行。比如说，<code>nvcc -V</code>显示<code>Cuda compilation tools, release 11.0, V11.0.194</code>，你下载的pytorch就要满足<code>x.x.x+cu11x</code>。</p>
-<p><img src="/.io//2.png"></p>
+<img src="/2022/05/06/nvidia-smi/2.png" class="">
+
 <blockquote>
 <p>torchvision和pytorch对应版本可<a target="_blank" rel="noopener" href="https://pypi.org/project/torchvision/">查看</a>。</p>
 <p>torchtext和pytorch对应版本可<a target="_blank" rel="noopener" href="https://pypi.org/project/torchtext/">查看</a>。</p>
