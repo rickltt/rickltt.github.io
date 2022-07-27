@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      Linux常用命令 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/color-scheme.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/comments.css">
+
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/logo.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">rickltt</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Linux常用命令</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2022-05-02 17:52:37
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="Linux简单教程"><a href="#Linux简单教程" class="headerlink" title="Linux简单教程"></a>Linux简单教程</h2><hr>
+<h3 id="Linux常规文件目录"><a href="#Linux常规文件目录" class="headerlink" title="Linux常规文件目录"></a>Linux常规文件目录</h3><p>Linux文件系统结构是从Unix文件结构演进过来的。在Linux文件系统中，通用的目录名用于表示一些常见的功能，下面列出了一些较常见的Linux顶层虚拟目录名及其内容。</p>
+<p><img src="/Linux/1.png" alt="图片描述"></p>
+<!-- <img src="./Linux常用命令/1.png" align='center' width=100%/> -->
+
+<h3 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h3><blockquote>
+<p>注意：这里列举了常用的Linux命令，不包含全部内容，如果你想更加深入学习，可以去查找相关资料。在Linux中可以使用<strong>man 命令</strong>来查看相应的命令手册，比如<strong>man cp</strong>即可查看<strong>cp</strong>命令的说明手册，上面写的很详细。</p>
+</blockquote>
+<blockquote>
+<p>注意：linux命令和参数之间要有空格</p>
+</blockquote>
+<h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><ul>
+<li><code>cd destination</code> ： <code>destination</code>表示想切换到的目录名。<code>destination</code>参数可以用两种方式表示：一种是使用绝对文件路径，另一种是使用相对文件路径。如果不了解绝对路径和相对路径，可以参考<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/5862.html">绝对路径和相对路径详解</a>。<ul>
+<li><code>cd ~</code> 进入用户(user)目录</li>
+<li><code>cd /</code> 进入根(root)目录</li>
+</ul>
+</li>
+</ul>
+<p>此外，可以使用单点符（.），表示当前目录； 双点符（..），表示当前目录的父目录.可以这样使用：</p>
+<ul>
+<li><code>cd ..</code> 返回上一级目录 </li>
+<li><code>cd ../</code> 再加上，上一级目录下其他文件夹的名字，就可以切换到那个路径。</li>
+</ul>
+<h3 id="文件和目录列表"><a href="#文件和目录列表" class="headerlink" title="文件和目录列表"></a>文件和目录列表</h3><ul>
+<li><code>pwd</code> 查看当前路径</li>
+<li><code>ls</code> ：列出当前路径下的文件和文件夹<ul>
+<li><code>ls -F</code> 区分文件和目录</li>
+<li><code>ls -a</code> 隐藏文件和普通文件及目录一起显示</li>
+<li><code>ls -l</code> 长列表格式输出，文件类型，文件权限，文件的硬链接总数，文件属主的用户名，文件属组的组名，文件的大小（以字节为单位），文件的上次修改时间，文件名或目录名等信息。<ul>
+<li>过滤输出列表：<code>ls</code>命令能够识别标准通配符，并在过滤器中用它们进行模式匹配。问号（<code>?</code>）代表一个字符,星号（<code>*</code>）代表零个或多个字符。<ul>
+<li><code>ls -l my_scr?pt</code> 问号可用于过滤器字符串中替代任意位置的单个字符</li>
+<li><code>ls -l my*</code> 星号可匹配零个或多个字符</li>
+</ul>
+</li>
+<li>使用中括号：<ul>
+<li><code>ls -l my_scr[ai]pt</code> 使用了中括号以及在特定位置上可能出现的两种字符：a或i进行模式匹配。</li>
+<li><code>ls -l f[a-i]ll</code> 字母范围[a – i]进行模式匹配。</li>
+<li><code>ls -l f[!a]ll</code> 使用感叹号（!）将不需要的内容排除在外。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>ls -R</code> 列出了当前目录下包含的子目录中的文件，-R参数表示递归选项。</li>
+<li><code>ls -al</code> 可以这样组合使用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="处理文件和目录"><a href="#处理文件和目录" class="headerlink" title="处理文件和目录"></a>处理文件和目录</h3><ul>
+<li><p><code>touch FILE</code> 创建一个名为<code>FILE</code>的空文件</p>
+</li>
+<li><p><code>cp &lt;source&gt; &lt;destination&gt;</code> 复制文件，cp命令需要两个参数<code>&lt;source&gt;</code> 、<code>&lt;destination&gt;</code>分别表示源对象和目标对象。</p>
+<ul>
+<li><code>cp -i</code> 询问是否需要覆盖已有文件</li>
+<li><code>cp -R</code> 递归地复制整个目录的内容</li>
+<li><code>cp file .</code> 单点符（.）就很适合用于cp命令。记住，单点符表示当前工作目录</li>
+<li>更多细节可以用<code>man cp</code>查看命令手册。</li>
+</ul>
+</li>
+<li><p><code>mv</code> 移动文件</p>
+<ul>
+<li><code>mv &lt;oldfile&gt; &lt;newfile&gt;</code> 重命名</li>
+<li><code>mv &lt;source&gt; &lt;destination&gt;</code> 移动文件位置</li>
+<li><code>mv -i</code> 和 cp 命令类似，也可以在 mv 命令中使用 -i参数 。这样在命令试图覆盖已有的文件时，你就会得到提示.</li>
+</ul>
+</li>
+<li><p><code>rm</code> 删除文件</p>
+<ul>
+<li><code>rm -r</code> 递归删除</li>
+<li><code>rm -d</code> 删除目录</li>
+<li><code>rm -i</code> 删除前有提示</li>
+<li><code>rm -f</code> 删除前没提示</li>
+</ul>
+</li>
+<li><p><code> mkdir</code> 新建目录</p>
+</li>
+<li><p><code>rmdir</code> 删除目录</p>
+</li>
+</ul>
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><ul>
+<li><code>file</code> 查看文件类型</li>
+<li><code>cat</code> 查看文件内容<ul>
+<li><code>cat -n</code> 所有行加上行号</li>
+<li><code>cat -b</code> 给有文本的行加行号，空行不加行号</li>
+</ul>
+</li>
+<li><code>tail</code><ul>
+<li><code>tail -n</code> 显示后面n行，默认是10</li>
+</ul>
+</li>
+<li><code>head</code><ul>
+<li><code>head -n</code>  显示前面n行，默认是10</li>
+</ul>
+</li>
+</ul>
+<h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><p><code>ps</code>命令</p>
+<ul>
+<li>ps -A 列出所有的进程</li>
+<li>ps -w 显示加宽可以显示较多的资讯</li>
+<li>ps -au 显示较详细的资讯</li>
+<li>ps -aux 显示所有包含其他使用者的行程</li>
+<li><code>ps -aux | grep &#39;bash&#39;</code></li>
+</ul>
+<h3 id="压缩和解压"><a href="#压缩和解压" class="headerlink" title="压缩和解压"></a>压缩和解压</h3><ul>
+<li><code>zip</code> 压缩为zip文件<ul>
+<li><code>zip -q -r FILE.zip DIR/</code> 将DIR目录下的文件压缩成<code>FILE.zip</code> ，-q 不打印压缩过程，-r递归处理，将DIR目录下的文件和目录递归压缩</li>
+</ul>
+</li>
+<li><code>unzip</code> 解压zip文件<ul>
+<li><code>unzip file.zip -d DIR/</code> 压缩到指定目录,file是你的文件名</li>
+</ul>
+</li>
+<li><code>tar</code> <ul>
+<li><code>-j</code> 将输出重定向给bzip2命令来压缩内容</li>
+<li><code>-x</code> 将输出重定向给gzip命令来压缩内容</li>
+<li><code>-c</code> 创建一个新的tar归档文件</li>
+<li><code>-t</code> 列出已有tar归档文件的内容</li>
+<li><code>-v</code> 在处理文件时显示文件</li>
+<li><code>-f</code> 输出结果到文件或设备</li>
+<li><code>tar -zcvf file.tar.gz DIR/FILE</code> 压缩DIR目录下的文件,file是你指定的文件名。</li>
+<li><code>tar -ztvf file.tar.gz</code> 查询</li>
+<li><code>tar -zxvf file.tar.gz -C DIR</code> 解压文件到DIR目录下</li>
+<li>如果是<code>.bz2</code>,则把参数<code>z</code>换成<code>j</code><blockquote>
+<p>如果以上看不懂，遇到<code>tar.gz</code>结尾的压缩文件，直接用<code>tar -zxvf 压缩文件名.tar.gz</code>就可以解压该文件了，前面加上路径的话就可以解压到指定文件夹。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="监测磁盘空间"><a href="#监测磁盘空间" class="headerlink" title="监测磁盘空间"></a>监测磁盘空间</h3><ul>
+<li><p><code>df</code> ：有时你需要知道在某个设备上还有多少磁盘空间。df命令可以让你很方便地查看所有已挂载磁盘的使用情况。</p>
+<ul>
+<li><code>df -h</code> 按照用户易读的形式显示，通常用M来替代兆字节，用G替代吉字节。</li>
+</ul>
+</li>
+<li><p><code>du</code> : du命令可以显示某个特定目录（默认情况下是当前目录）的磁盘使用情况。</p>
+<ul>
+<li><code>du -h</code>: 按用户易读的格式输出大小，即用K替代千字节，用M替代兆字节，用G替代吉字节。</li>
+<li><code>du -c</code>: 显示所有已列出文件总的大小。</li>
+<li><code>du -s</code>: 显示每个输出参数的总计。</li>
+</ul>
+</li>
+<li><p><code>mount</code></p>
+</li>
+<li><p><code>unmount</code></p>
+</li>
+</ul>
+<h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><h4 id="理解文件权限"><a href="#理解文件权限" class="headerlink" title="理解文件权限"></a>理解文件权限</h4><h4 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h4><h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3>
+      </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B"><span class="toc-text">Linux简单教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E5%B8%B8%E8%A7%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">Linux常规文件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">Linux常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E5%88%97%E8%A1%A8"><span class="toc-text">文件和目录列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">处理文件和目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="toc-text">查看进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩和解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E6%B5%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4"><span class="toc-text">监测磁盘空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="toc-text">查看端口占用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">理解文件权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">修改文件权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/rickltt">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" target="_blank" rel="noopener" href="https://weibo.com/u/5444259408">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/rickltt">Copyright © 2022 rickltt</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/rickltt">Theme by rickltt | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>
