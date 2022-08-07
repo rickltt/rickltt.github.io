@@ -167,12 +167,13 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="Linux简单教程"><a href="#Linux简单教程" class="headerlink" title="Linux简单教程"></a>Linux简单教程</h2><hr>
-<h3 id="Linux常规文件目录"><a href="#Linux常规文件目录" class="headerlink" title="Linux常规文件目录"></a>Linux常规文件目录</h3><p>Linux文件系统结构是从Unix文件结构演进过来的。在Linux文件系统中，通用的目录名用于表示一些常见的功能，下面列出了一些较常见的Linux顶层虚拟目录名及其内容。</p>
+        <p>[toc]</p>
+<h1 id="Linux简单教程"><a href="#Linux简单教程" class="headerlink" title="Linux简单教程"></a>Linux简单教程</h1><hr>
+<h2 id="Linux常规文件目录"><a href="#Linux常规文件目录" class="headerlink" title="Linux常规文件目录"></a>Linux常规文件目录</h2><p>Linux文件系统结构是从Unix文件结构演进过来的。在Linux文件系统中，通用的目录名用于表示一些常见的功能，下面列出了一些较常见的Linux顶层虚拟目录名及其内容。</p>
 <img src="/2022/05/02/Linux/1.png" class="" title="图片描述">
 <!-- <img src="./Linux常用命令/1.png" align='center' width=100%/> -->
 
-<h3 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h3><blockquote>
+<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><blockquote>
 <p>注意：这里列举了常用的Linux命令，不包含全部内容，如果你想更加深入学习，可以去查找相关资料。在Linux中可以使用<strong>man 命令</strong>来查看相应的命令手册，比如<strong>man cp</strong>即可查看<strong>cp</strong>命令的说明手册，上面写的很详细。</p>
 </blockquote>
 <blockquote>
@@ -210,7 +211,7 @@
 </ul>
 </li>
 <li><code>ls -R</code> 列出了当前目录下包含的子目录中的文件，-R参数表示递归选项。</li>
-<li><code>ls -al</code> 可以这样组合使用。</li>
+<li><code>ls -alh</code> 可以这样组合使用，h和l组合时，会以MB、GB等方式显示文件大小。</li>
 </ul>
 </li>
 </ul>
@@ -263,10 +264,11 @@
 </ul>
 <h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><p><code>ps</code>命令</p>
 <ul>
-<li>ps -A 列出所有的进程</li>
-<li>ps -w 显示加宽可以显示较多的资讯</li>
-<li>ps -au 显示较详细的资讯</li>
-<li>ps -aux 显示所有包含其他使用者的行程</li>
+<li><code>ps -A</code> 列出所有的进程</li>
+<li><code>ps -ef</code> </li>
+<li><code>ps -w</code> 显示加宽可以显示较多的资讯</li>
+<li><code>ps -au</code> 显示较详细的资讯</li>
+<li><code>ps -aux</code> 显示所有包含其他使用者的行程</li>
 <li><code>ps -aux | grep &#39;bash&#39;</code></li>
 </ul>
 <h3 id="压缩和解压"><a href="#压缩和解压" class="headerlink" title="压缩和解压"></a>压缩和解压</h3><ul>
@@ -295,7 +297,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="监测磁盘空间"><a href="#监测磁盘空间" class="headerlink" title="监测磁盘空间"></a>监测磁盘空间</h3><ul>
+<h2 id="监测磁盘空间"><a href="#监测磁盘空间" class="headerlink" title="监测磁盘空间"></a>监测磁盘空间</h2><ul>
 <li><p><code>df</code> ：有时你需要知道在某个设备上还有多少磁盘空间。df命令可以让你很方便地查看所有已挂载磁盘的使用情况。</p>
 <ul>
 <li><code>df -h</code> 按照用户易读的形式显示，通常用M来替代兆字节，用G替代吉字节。</li>
@@ -313,7 +315,72 @@
 <li><p><code>unmount</code></p>
 </li>
 </ul>
-<h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><h4 id="理解文件权限"><a href="#理解文件权限" class="headerlink" title="理解文件权限"></a>理解文件权限</h4><h4 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h4><h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3>
+<h2 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h2><ul>
+<li><code>netstat</code>:<ul>
+<li><code>-t</code>: 显示tcp相关选项</li>
+<li><code>-u</code>: 显示udp相关选项</li>
+<li><code>-n</code>:-拒绝显示别名，能显示数字的全部转化为数字</li>
+<li><code>l</code>: 仅列出在Listen(监听)的服务状态</li>
+<li><code>p</code>: 显示建立相关链接的程序名</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>netstat -tunlp | grep 端口号</p>
+</blockquote>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h2 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h2><p>每个Linux文件具有四种访问权限：可读(r)、可写(w)、可执行(x)和无权限(-)。<br>利用ls -l命令可以看到某个文件或目录的权限，它以显示数据的第一个字段为准。第一个字段由10个字符组成，如下：</p>
+<blockquote>
+<p>-rwxr-xr-x</p>
+</blockquote>
+<ul>
+<li>第一位表示文件类型，-表示文件，d表示目录</li>
+<li>后面有三组rwx，分别代表 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）的权限。</li>
+</ul>
+<h3 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h3><p>数字表示法： 是指将r、w和x分别用4、2、1来代表，没有授予权限的则为0，然后把权限相加</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例如：</span></span><br><span class="line"><span class="comment"># rwxrwxr-x 数字表示为775</span></span><br><span class="line"><span class="comment"># rwxr-xr-x 数字表示为755</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改权限如下：</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> 775 test.txt  <span class="comment">#会把test.txt的权限改成rwxrwxr-x</span></span><br></pre></td></tr></table></figure>
+
+<p>文本表示法：4个字母表示不同的用户</p>
+<ul>
+<li>u：所有者</li>
+<li>g：组成员</li>
+<li>o：其他成员</li>
+<li>a：所有人</li>
+</ul>
+<p>权限仍用r、w和x表示</p>
+<ul>
+<li>&#x3D;：重新制定权限</li>
+<li>-：对目前的设置减少权限</li>
+<li>+：对目前的设置增加权限</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件所有者的权限增加可执行权限</span></span><br><span class="line"><span class="comment"># 用户组的权限减少可执行的权限</span></span><br><span class="line"><span class="comment"># 其他成员定义为只有执行权限。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> u+x,g-x,o=x test.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="x2F-etc-x2F-passwd-文件"><a href="#x2F-etc-x2F-passwd-文件" class="headerlink" title="&#x2F;etc&#x2F;passwd 文件:"></a>&#x2F;etc&#x2F;passwd 文件:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd </span><br><span class="line"></span><br><span class="line"># 例：mysql:x:27:27:MySQL Server:/var/lib/mysql:/bin/bash</span><br><span class="line"></span><br><span class="line"># 从左到右表示，用户名、密码、用户UID、组ID、账户文本描述、用户HOME目录位置、用户默认SHELL</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="x2F-etc-x2F-shadow"><a href="#x2F-etc-x2F-shadow" class="headerlink" title="&#x2F;etc&#x2F;shadow"></a>&#x2F;etc&#x2F;shadow</h3><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><ul>
+<li><code>useradd</code><ul>
+<li><code>-D</code>:</li>
+<li><code>c</code>:</li>
+</ul>
+</li>
+</ul>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><p><code>userdel -r test</code> test用户的HOME目录和邮件目录会被删掉。</p>
+<h3 id="修改操作"><a href="#修改操作" class="headerlink" title="修改操作"></a>修改操作</h3><ul>
+<li><code>passwd</code></li>
+<li><code>chsh</code></li>
+<li><code>usermod</code></li>
+</ul>
+<h2 id="Linux组"><a href="#Linux组" class="headerlink" title="Linux组"></a>Linux组</h2><p>用户账户在控制单个用户安全性方面很好用，但涉及在共享资源的一组用户时就捉襟见肘了。为了解决这个问题，Linux系统采用了另外一个安全概念——组（group）。</p>
+<p>组权限允许<strong>多个用户对系统中的对象（比如文件、目录或设备等）共享一组共用的权限</strong>。</p>
+<h3 id="x2F-etc-x2F-group"><a href="#x2F-etc-x2F-group" class="headerlink" title="&#x2F;etc&#x2F;group"></a>&#x2F;etc&#x2F;group</h3><p>与用户账户类似，组信息也保存在系统的一个文件中，该文件中每一行的格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:root </span><br><span class="line">bin:x:1:root,bin,daemon </span><br><span class="line">daemon:x:2:root,bin,daemon </span><br><span class="line">sys:x:3:root,bin,adm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从左到右表示，组名、组密码、组ID、组成员。</span></span><br><span class="line"><span class="comment"># 一般系统账户的组ID低于500，用户的组ID大于500。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>groupadd</code>:创建新组</li>
+<li><code>groupmod</code>:修改组</li>
+</ul>
+
       </div>
       
     </div>
@@ -325,7 +392,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B"><span class="toc-text">Linux简单教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E5%B8%B8%E8%A7%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">Linux常规文件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">Linux常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E5%88%97%E8%A1%A8"><span class="toc-text">文件和目录列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">处理文件和目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="toc-text">查看进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩和解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E6%B5%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4"><span class="toc-text">监测磁盘空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="toc-text">查看端口占用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">理解文件权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">修改文件权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B"><span class="toc-text">Linux简单教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%B8%B8%E8%A7%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">Linux常规文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">Linux常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E5%88%97%E8%A1%A8"><span class="toc-text">文件和目录列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">处理文件和目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="toc-text">查看进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩和解压</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E6%B5%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4"><span class="toc-text">监测磁盘空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="toc-text">查看端口占用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">修改文件权限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#x2F-etc-x2F-passwd-%E6%96%87%E4%BB%B6"><span class="toc-text">&#x2F;etc&#x2F;passwd 文件:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x2F-etc-x2F-shadow"><span class="toc-text">&#x2F;etc&#x2F;shadow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7"><span class="toc-text">添加用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-text">删除用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C"><span class="toc-text">修改操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%BB%84"><span class="toc-text">Linux组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#x2F-etc-x2F-group"><span class="toc-text">&#x2F;etc&#x2F;group</span></a></li></ol></li></ol></li></ol>
       
     </div>
   </div>
