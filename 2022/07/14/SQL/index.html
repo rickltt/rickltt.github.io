@@ -11,7 +11,7 @@
   
   <title>
     
-      终端复用工具Screen和Tmux速查表 
+      SQL笔记 
       
       
       |
@@ -147,19 +147,19 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">终端复用工具Screen和Tmux速查表</div>
+      <div class="post-title">SQL笔记</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-05-02 14:16:20
+          2022-07-14 10:42:31
         </span>
         
               <span class="post-categories">
                 <i class="iconfont icon-bookmark" title="分类"></i>
                 
                 <span class="span--category">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" title="工具">
-                    <b>#</b> 工具
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+                    <b>#</b> 大数据
                   </a>
                 </span>
                 
@@ -167,21 +167,32 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="Screen"><a href="#Screen" class="headerlink" title="Screen"></a>Screen</h1><p>常规使用方法：</p>
-<ul>
-<li>创建一个新的会话： <code>screen -S [会话名]</code></li>
-<li>离开会话： <code>ctl + a + d</code></li>
-<li>脱离会话: <code>screen -d session_name</code></li>
-<li><code>screen -wipe</code> :  删除dead(已经死掉的)会话</li>
-<li><code>screen python main.py</code> :  创建一个运行main.py的会话</li>
-<li>删除会话: <code>screen -S id.session_name -X quit</code></li>
-<li>重新进入会话：<ul>
-<li>先找到所有离开的会话: <code>screen -ls</code></li>
-<li>然后恢复到对应的会话：<code>screen -r [会话]</code></li>
-</ul>
-</li>
-</ul>
-<h1 id="Tmux"><a href="#Tmux" class="headerlink" title="Tmux"></a>Tmux</h1>
+        <h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><h2 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h2><p>设计关系型数据库时需要遵守不同的规范，称为数据库范式(Normal Form,NF)，分别是1NF、2NF、3NF、BCNF、4NF、5NF。</p>
+<p>![image-20220804094543630](&#x2F;Users&#x2F;ltt&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220804094543630.png)</p>
+<p>完全函数依赖：设X，Y是关系R的两个属性集合，X‘是X的真子集，存在X-&gt;Y，但对每一个X‘都有X’!-&gt;Y，则称Y完全函数依赖于X。</p>
+<blockquote>
+<p>(学号，课程)是一个属性集合，但是单独用学号或课程推不出来分数，那么就可以说：分数完全依赖于(学号，课程)。</p>
+</blockquote>
+<p>部分函数依赖：假如Y函数依赖于X，但是Y并不完全函数依赖X，则称Y部分函数依赖于X。</p>
+<blockquote>
+<p>(学号，课程)推出姓名，但其实可以通过学号推出姓名，所以姓名部分依赖于(学号，课程)。即通过AB可以得到C，或者通过B也能得到C，则称C部分依赖于AB。</p>
+</blockquote>
+<p>传递函数依赖：设X，Y，Z是R中三个不同的属性集合，存在X-&gt;Y(Y!-&gt;X)，Y-&gt;Z，则称Z传递函数依赖于X。</p>
+<blockquote>
+<p>学号推出系名，系名推出系主任，但是系主任推不出学号，则称系主任传递依赖于学号。简单说就是通过A得到B，再通过B得到C，但是C得不到A，那么就说C传递依赖于A。</p>
+</blockquote>
+<p>码：设K为某表中一个属性或者属性组，除K之外的所有属性都完全依赖于K，则称K为码。</p>
+<blockquote>
+<p>换言之，假如K确定，则表中除了K之外的属性都确定。</p>
+</blockquote>
+<p>主属性：包含在任意一个码中的属性，称为主属性。</p>
+<p>非主属性：不包含在任意一个码中的属性，称为非主属性。</p>
+<h3 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h3><p>核心原则：属性不可再分。</p>
+<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><p>核心原则：消除部分函数依赖</p>
+<h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3><p>核心原则：消除传递函数依赖</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>ACID性质：</p>
+<p>create table dept_partition(<br>deptno int, dname string, loc string<br>)<br>partitioned by (day string)<br>row format delimited fields terminated by ‘\t’;</p>
+
       </div>
       
     </div>
@@ -193,7 +204,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Screen"><span class="toc-text">Screen</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tmux"><span class="toc-text">Tmux</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL"><span class="toc-text">SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F"><span class="toc-text">数据库范式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1NF"><span class="toc-text">1NF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2NF"><span class="toc-text">2NF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3NF"><span class="toc-text">3NF</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a></li></ol></li></ol>
       
     </div>
   </div>
