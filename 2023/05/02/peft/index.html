@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="ltt_rick" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      参数高效微调（PEFT） 
+      
+      
+      |
+    
+     lttBlog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/color-scheme.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/comments.css">
+
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/logo.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">rickltt</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">分类</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">参数高效微调（PEFT）</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2023-05-02 14:16:20
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/LLM/" title="LLM">
+                    <b>#</b> LLM
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="State-of-the-art-Parameter-Efficient-Fine-Tuning-PEFT"><a href="#State-of-the-art-Parameter-Efficient-Fine-Tuning-PEFT" class="headerlink" title="State-of-the-art Parameter-Efficient Fine-Tuning (PEFT)"></a>State-of-the-art Parameter-Efficient Fine-Tuning (PEFT)</h1><p>PEFT 方法仅微调少量 (额外) 模型参数，同时冻结预训练 LLM 的大部分参数，从而大大降低了计算和存储成本。</p>
+<p>PEFT 可以使 PLM 高效适应各种下游应用任务，而无需微调预训练模型的所有参数。这也克服了<strong>灾难性遗忘</strong>的问题，这是在 LLM 的全参数微调期间观察到的一种现象。 PEFT 方法也显示出在低数据状态下比微调更好，可以更好地泛化到域外场景。</p>
+<ol>
+<li>LoRA: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.09685">LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS</a></li>
+<li>Prefix Tuning: <a target="_blank" rel="noopener" href="https://aclanthology.org/2021.acl-long.353/">Prefix-Tuning: Optimizing Continuous Prompts for Generation</a>, <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2110.07602.pdf">P-Tuning v2: Prompt Tuning Can Be Comparable to Fine-tuning Universally Across Scales and Tasks</a></li>
+<li>P-Tuning: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2103.10385">GPT Understands, Too</a></li>
+<li>Prompt Tuning: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.08691">The Power of Scale for Parameter-Efficient Prompt Tuning</a></li>
+<li>AdaLoRA: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.10512">Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning</a></li>
+</ol>
+<h2 id="Prefix-Tuning"><a href="#Prefix-Tuning" class="headerlink" title="Prefix Tuning"></a>Prefix Tuning</h2><img src="/2023/05/02/peft/prefix.png" class="" title="prefix">
+
+<p>Prefix-Tuning 在模型输入前添加一个连续的且任务特定的向量序列（continuous task-specific vectors），称之为前缀（prefix）。前缀被视为一系列“虚拟 tokens”，但是它由不对应于真实 tokens 的自由参数组成。Prefix-Tuning 固定 PLM 的所有参数，只更新优化特定任务的 prefix。</p>
+<p>对于自回归语言模型(GPT)，在输入前添加前缀，即$z&#x3D;[Prefix,x,y]$。对于Seq2Seq（Encoder-Decoder），在输入和输出前添加前缀，即$z&#x3D;[Prefix,x,Prefix,y]$。</p>
+<p>假设Prefix的参数为一个向量矩阵$P_{\theta}$，纬度为$|P_{idx}| \times dim(h_{i})$，$P_{idx}$为前缀序列的索引，$|P_{idx}|$为前缀的长度。</p>
+<p>隐层表示的计算如下式所示，若索引为前缀索引$P_{idx}$，直接从$P_{\theta}$ 复制对应的向量作为$h_{i}$，在模型每一层都添加前缀向量；否则直接通过 LM 计算得到，同时，经过 LM 计算的$h_{i}$也依赖于其左侧的前缀参数$P_{\theta}$，即通过前缀来影响后续的序列隐层激化值。</p>
+<p>$$h(i) &#x3D; \begin{cases}<br>P_{\theta}[i,:], &amp; i \in P_{idx} \<br>LM_{\phi}(z_i,h_{&lt;i}), &amp; otherwise \<br>\end{cases}$$</p>
+<p>直接优化$P_{\theta}$会导致训练不稳定，通过一个更小的矩阵$P_{\theta}^{‘}$和一个更大的前馈神经网络$MLP_{\theta}$对$P_{\theta}$进行重参数化：$P_{\theta}[i,:] &#x3D; MLP_{\theta}(P_{\theta}^{‘}[i,:])$。在训练时，LM的参数被固定，只有前缀参数为可训练的参数。训练完成后，只有前缀被保存。</p>
+<p>Python代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PrefixEncoder</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, config</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.prefix_projection = config.prefix_projection</span><br><span class="line">        token_dim = config.token_dim</span><br><span class="line">        num_layers = config.num_layers</span><br><span class="line">        encoder_hidden_size = config.encoder_hidden_size</span><br><span class="line">        num_virtual_tokens = config.num_virtual_tokens</span><br><span class="line">        <span class="keyword">if</span> self.prefix_projection <span class="keyword">and</span> <span class="keyword">not</span> config.inference_mode:</span><br><span class="line">            <span class="comment"># Use a two-layer MLP to encode the prefix</span></span><br><span class="line">            self.embedding = torch.nn.Embedding(num_virtual_tokens, token_dim)</span><br><span class="line">            self.transform = torch.nn.Sequential(</span><br><span class="line">                torch.nn.Linear(token_dim, encoder_hidden_size),</span><br><span class="line">                torch.nn.Tanh(),</span><br><span class="line">                torch.nn.Linear(encoder_hidden_size, num_layers * <span class="number">2</span> * token_dim),</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.embedding = torch.nn.Embedding(num_virtual_tokens, num_layers * <span class="number">2</span> * token_dim)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, prefix: torch.Tensor</span>):</span><br><span class="line">        <span class="keyword">if</span> self.prefix_projection:</span><br><span class="line">            prefix_tokens = self.embedding(prefix)</span><br><span class="line">            past_key_values = self.transform(prefix_tokens)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            past_key_values = self.embedding(prefix)</span><br><span class="line">        <span class="keyword">return</span> past_key_values</span><br></pre></td></tr></table></figure>
+
+<h2 id="P-Tuning"><a href="#P-Tuning" class="headerlink" title="P-Tuning"></a>P-Tuning</h2><img src="/2023/05/02/peft/ptuning.png" class="" title="prefix">
+
+<p>P-Tuning 利用少量连续的 embedding 参数作为 prompt 使 GPT 更好的应用于 NLU 任务，而 Prefix-Tuning 是针对 NLG 任务设计。P-Tuning 只在 embedding 层增加参数，而 Prefix-Tuning 在每一层都添加可训练参数。</p>
+<p>Python 代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PromptEncoder</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, config</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.token_dim = config.token_dim</span><br><span class="line">        self.input_size = self.token_dim</span><br><span class="line">        self.output_size = self.token_dim</span><br><span class="line">        self.hidden_size = config.encoder_hidden_size</span><br><span class="line">        self.total_virtual_tokens = config.num_virtual_tokens * config.num_transformer_submodules</span><br><span class="line">        self.encoder_type = config.encoder_reparameterization_type</span><br><span class="line"></span><br><span class="line">        <span class="comment"># embedding</span></span><br><span class="line">        self.embedding = torch.nn.Embedding(self.total_virtual_tokens, self.token_dim)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> config.inference_mode:</span><br><span class="line">            <span class="keyword">if</span> self.encoder_type == PromptEncoderReparameterizationType.LSTM:</span><br><span class="line">                lstm_dropout = config.encoder_dropout</span><br><span class="line">                num_layers = config.encoder_num_layers</span><br><span class="line">                <span class="comment"># LSTM</span></span><br><span class="line">                self.lstm_head = torch.nn.LSTM(</span><br><span class="line">                    input_size=self.input_size,</span><br><span class="line">                    hidden_size=self.hidden_size,</span><br><span class="line">                    num_layers=num_layers,</span><br><span class="line">                    dropout=lstm_dropout,</span><br><span class="line">                    bidirectional=<span class="literal">True</span>,</span><br><span class="line">                    batch_first=<span class="literal">True</span>,</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line">                self.mlp_head = torch.nn.Sequential(</span><br><span class="line">                    torch.nn.Linear(self.hidden_size * <span class="number">2</span>, self.hidden_size * <span class="number">2</span>),</span><br><span class="line">                    torch.nn.ReLU(),</span><br><span class="line">                    torch.nn.Linear(self.hidden_size * <span class="number">2</span>, self.output_size),</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> self.encoder_type == PromptEncoderReparameterizationType.MLP:</span><br><span class="line">                warnings.warn(</span><br><span class="line">                    <span class="string">f&quot;for <span class="subst">&#123;self.encoder_type&#125;</span>, the `encoder_num_layers` is ignored. Exactly 2 MLP layers are used.&quot;</span></span><br><span class="line">                )</span><br><span class="line">                layers = [</span><br><span class="line">                    torch.nn.Linear(self.input_size, self.hidden_size),</span><br><span class="line">                    torch.nn.ReLU(),</span><br><span class="line">                    torch.nn.Linear(self.hidden_size, self.hidden_size),</span><br><span class="line">                    torch.nn.ReLU(),</span><br><span class="line">                    torch.nn.Linear(self.hidden_size, self.output_size),</span><br><span class="line">                ]</span><br><span class="line">                self.mlp_head = torch.nn.Sequential(*layers)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">&quot;Prompt encoder type not recognized. Please use one of MLP (recommended) or LSTM.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, indices</span>):</span><br><span class="line">        input_embeds = self.embedding(indices)</span><br><span class="line">        <span class="keyword">if</span> self.encoder_type == PromptEncoderReparameterizationType.LSTM:</span><br><span class="line">            output_embeds = self.mlp_head(self.lstm_head(input_embeds)[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">elif</span> self.encoder_type == PromptEncoderReparameterizationType.MLP:</span><br><span class="line">            output_embeds = self.mlp_head(input_embeds)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Prompt encoder type not recognized. Please use one of MLP (recommended) or LSTM.&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> output_embeds</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Prompt-Tuning"><a href="#Prompt-Tuning" class="headerlink" title="Prompt Tuning"></a>Prompt Tuning</h2><p>Prompt Tuning 方式可以看做是 Prefix Tuning 的简化，固定整个预训练模型参数，只允许将每个下游任务的额外k个可更新的 tokens 前置到输入文本中，也没有使用额外的编码层或任务特定的输出层。如下图所示，在模型大小增加到一定规模时，仅仅使用 Prompt Tuning 就足以达到 Fine Tuning 的性能。</p>
+<h2 id="LoRA"><a href="#LoRA" class="headerlink" title="LoRA"></a>LoRA</h2>
+      </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#State-of-the-art-Parameter-Efficient-Fine-Tuning-PEFT"><span class="toc-text">State-of-the-art Parameter-Efficient Fine-Tuning (PEFT)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prefix-Tuning"><span class="toc-text">Prefix Tuning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#P-Tuning"><span class="toc-text">P-Tuning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prompt-Tuning"><span class="toc-text">Prompt Tuning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LoRA"><span class="toc-text">LoRA</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/rickltt">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="mailto:ltt_rick@163.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="rick.jpg">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="weibo" target="_blank" rel="noopener" href="https://weibo.com/u/5444259408">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/rickltt">Copyright © 2023 rickltt</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -11,7 +11,7 @@
   
   <title>
     
-      标签 
+      LLM 
       
       
       |
@@ -142,22 +142,84 @@
   
 
   
-  <!-- 关于页 url形式：https://yoursite/about/ -->
-    <div class="container about-index">
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">LLM</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2023-05-02 14:16:20
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/LLM/" title="LLM">
+                    <b>#</b> LLM
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
       <div class="markdown-body">
-        <ul>
-<li>👋 Hi,I’m rickltt!</li>
-<li>🌱 I’m a graduate student at GDUT and will graduate in June 2024.</li>
-<li>👀 I’m currently learning Natural Language Processing, especially Information Extraction (IE) and Large Languages Models (LLMs).</li>
-<li>👯 I’m looking to collaborate on everyone.</li>
-<li>📫 How to reach me:<a href="mailto:&#x6c;&#x74;&#116;&#x5f;&#x72;&#105;&#x63;&#107;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#109;">&#x6c;&#x74;&#116;&#x5f;&#x72;&#105;&#x63;&#107;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#109;</a></li>
+        <h1 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h1><h2 id="LLaMA"><a href="#LLaMA" class="headerlink" title="LLaMA"></a>LLaMA</h2><ul>
+<li>预归一化： 为了提高训练的稳定性，对每个transformer子层的输入进行归一化，而不是对输出进行归一化。使用RMSNorm归一化函数。</li>
+<li>SwiGLU激活函数[PaLM]:使用SwiGLU激活函数取代ReLU非线性，以提高性能。使用2&#x2F;3 4d的维度，而不是PaLM中的4d。</li>
+<li>旋转位置嵌入：删除了绝对位置嵌入，取而代之的是在网络的每一层添加苏神的旋转位置嵌入（RoPE）。</li>
 </ul>
+<h2 id="GLM"><a href="#GLM" class="headerlink" title="GLM"></a>GLM</h2><p>相比其他大语言模型，GLM兼顾了自编码、自编码的特点。</p>
+<p>预训练任务：自回归空格填充。自回归空白填充目标是指在输入文本中随机挖去一些连续的文本片段，然后训练模型按照任意顺序重建这些片段。完形填空问题是指在输入文本中用一个特殊的符号（如[MASK]）替换掉一个或多个词，然后训练模型预测被替换掉的词。</p>
+<p>改进点：</p>
+<ol>
+<li>打乱空白区域的预测顺序</li>
+<li>二维位置编码。</li>
+</ol>
+<img src="/2023/05/02/llm/glm.png" class="" title="glm">
+
+<ul>
+<li><p>原始文本 $x &#x3D; [x_1,x_2,x_3,x_4,x_5,x_6]$，随机进行连续 mask，这里假设 mask 掉 $[x_3]$和 $[x_5,x_6]$，跨度的长度服从泊松分布。</p>
+</li>
+<li><p>将$[x_3]$和$[x_5,x_6]$替换为 [M] 标志，并打乱 Part B 的顺序。为了捕捉跨度之间的内在联系，随机交换跨度的顺序。</p>
+</li>
+<li><p>GLM 自回归地生成 Part B。 每个片段在输入时前面加上 [S]，在输出时后面加上 [E]。 二维位置编码表示不同片段之间和片段内部的位置关系。</p>
+</li>
+<li><p>自注意力掩码。 灰色区域被掩盖。 Part A 的词语可以自我看到（图2(d)蓝色框），但不能看到 Part B。 Part B 的词语可以看到 Part A 和 Part B 中的前面的词语（图2(d)黄色和绿色框对应两个片段）。 [M] :&#x3D; [MASK]，[S] :&#x3D; [START]，[E] :&#x3D; [END]。</p>
+</li>
+</ul>
+<p>Position1 和 Position2 是输入的二维编码，第一个维度表示片段在原始文本中的相对位置，第二个维度表示片段内部的相对位置。</p>
+<h2 id="ChatGLM"><a href="#ChatGLM" class="headerlink" title="ChatGLM"></a>ChatGLM</h2><p>ChatGLM-6B(62亿参数)，结合模型量化技术，经过约 1T 标识符的中英双语训练，辅以监督微调、 反馈自助、人类反馈强化学习等技术的加持。</p>
+<p>Prompt更多地用于帮助模型理解任务和上下文，而Instruction则更多地用于指导模型执行具体操作或完成任务。。Instruction的目的是告诉模型如何处理数据或执行某个操作，而不是简单地提供上下文或任务相关信息。</p>
 
       </div>
+      
     </div>
-  
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LLM"><span class="toc-text">LLM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LLaMA"><span class="toc-text">LLaMA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GLM"><span class="toc-text">GLM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChatGLM"><span class="toc-text">ChatGLM</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
 
   
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
 
         
 <div class="footer">
