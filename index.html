@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.references {
+  list-style: none;
+  padding-left: 0;
+}
+
+.references li {
+  counter-increment: ref -1;
+  margin: 6px 0;
+}
+
+.references li::before {
+  content: "[" counter(ref) "] ";
+  font-weight: bold;
+}
+
+</style>
+</head>
+
 <h1>Tongtao Ling</h1>
 <img src="./photo.png" alt="My pic" style="width: 200px; height: 250px;">
 <div>
@@ -6,13 +29,13 @@
     My research interest includes (but is not limited to):
     <ul>
         <li>
-            Speech Enhancement, Speech Separation
+            Speech Separation
         </li>
         <li>
             Audio-Visual Target Speaker Extraction
         </li>
         <li>
-            Neural Audio Codec
+            Multi-Modal Speech Enhancement
         </li>
     </ul>
     Email:  <a href="mailto:lingtongtao@gmail.com">lingtongtao@gmail.com</a> / <a href="mailto:lingtt@mail.sustech.edu.cn">lingtt2025@mail.sustech.edu.cn</a>
@@ -58,57 +81,55 @@
     Publications
 </h2>
 
+<ol class="references">
 <h3>
     2026
 </h3>
-
-<ol>
     <li>
-        <strong>T. Ling</strong>, S. He, Z.-Q. Wang, "TGTSE: Token-Guided Target Speaker Extraction with Visual Cue", in <em>Proc. Interspeech</em>, 2026.  (<strong>CCF B</strong>) [<strong>Paper under review</strong>]
+        <strong>T. Ling</strong>, S. He, Z.-Q. Wang, "TGTSE: Token-Guided Target Speaker Extraction with Visual Cue", in <em><strong>Interspeech</strong></em>, 2026.  (<strong>CCF B</strong>) [<strong>Paper under review</strong>]
     </li>
     <li>
-        <strong>T. Ling</strong>, S. He, P. Shen, Z.-Q. Wang, "<a href="https://arxiv.org/pdf/2510.15437" target="_blank">MC-LExt: Multi-Channel Target Speaker Extraction with Onset-Prompted Speaker Conditioning Mechanism</a>", in <em>Proc. ICASSP</em>, 2026.  (<strong>CCF B</strong>)
+        <strong>T. Ling</strong>, P. Shen, Z.-Q. Wang, "The SUSTech AILab System Description for CHiME-9 MCoRec Challenge", in <em><strong>ICASSP Workshop on HSCMA and CHiME</strong></em>, 2026. 
     </li>
     <li>
-        Y. Lai, Z. Cai, L. Chen, <strong>T. Ling</strong>, H.-L. Liu, "<a href="https://ieeexplore.ieee.org/document/11421471" target="_blank">LLMENAS: Evolutionary Neural Architecture Search via Large Language Model Guidance</a>", in <em>IEEE Transactions on Evolutionary Computation (<strong>TEVC</strong>)</em>, 2026.  (<strong>CCF B</strong>)
+        <strong>T. Ling</strong>, S. He, P. Shen, Z.-Q. Wang, "<a href="https://arxiv.org/pdf/2510.15437" target="_blank">MC-LExt: Multi-Channel Target Speaker Extraction with Onset-Prompted Speaker Conditioning Mechanism</a>", in <em><strong>ICASSP</strong></em>, 2026.  (<strong>CCF B</strong>)
     </li>
-</ol>
+    <li>
+        Y. Lai, Z. Cai, L. Chen, <strong>T. Ling</strong>, H.-L. Liu, "<a href="https://ieeexplore.ieee.org/document/11421471" target="_blank">LLMENAS: Evolutionary Neural Architecture Search via Large Language Model Guidance</a>", in <em>IEEE Transactions on Evolutionary Computation (<strong><strong>TEVC</strong></strong>)</em>, 2026.  (<strong>CCF B</strong>)
+    </li>
 
 <h3>
     2024
 </h3>
 
-<ol>
     <li>
-        <strong>T. Ling</strong>, L. Chen, Y. Lai, et al., "<a href="https://www.sciencedirect.com/science/article/abs/pii/S089360802400251X" target="_blank">Span-based Few-shot Event Detection via Aligning External Knowledge</a>", in <em>Neural Networks (<strong>NN</strong>)</em>, vol. 176, p. 106327, 2024. (<strong>CCF B</strong>)
+        <strong>T. Ling</strong>, L. Chen, Y. Lai, <em>et al.</em>, "<a href="https://www.sciencedirect.com/science/article/abs/pii/S089360802400251X" target="_blank">Span-based Few-shot Event Detection via Aligning External Knowledge</a>", in <em>Neural Networks (<strong>NN</strong>)</em>, vol. 176, p. 106327, 2024. (<strong>CCF B</strong>)
     </li>
     <li>
-        <strong>T. Ling</strong>, Y. Lai, L. Chen, et al., "<a href="https://www.isca-archive.org/interspeech_2024/ling24_interspeech.html" target="_blank">A Small and Fast BERT for Chinese Medical Punctuation Restoration</a>", in <em>Proc. Interspeech</em>, pp. 4533-4537, 2024. (<strong>CCF B</strong>)
+        <strong>T. Ling</strong>, Y. Lai, L. Chen, <em>et al.</em>, "<a href="https://www.isca-archive.org/interspeech_2024/ling24_interspeech.html" target="_blank">A Small and Fast BERT for Chinese Medical Punctuation Restoration</a>", in <em><strong>ICASSP</strong></em>, pp. 4533-4537, 2024. (<strong>CCF B</strong>)
     </li>
     <li>
-        Z. Cai, L. Chen, P. Liu, <strong>T. Ling</strong>, et al., "<a href="https://ojs.aaai.org/index.php/AAAI/article/view/28993" target="_blank">EG-NAS: Neural Architecture Search with Fast Evolutionary Exploration</a>", in <em>Proc. AAAI</em>, pp. 11159-11167, 2024. (<strong>CCF A</strong>)
+        Z. Cai, L. Chen, P. Liu, <strong>T. Ling</strong>, <em>et al.</em>, "<a href="https://ojs.aaai.org/index.php/AAAI/article/view/28993" target="_blank">EG-NAS: Neural Architecture Search with Fast Evolutionary Exploration</a>", in <em><strong>AAAI</strong></em>, pp. 11159-11167, 2024. (<strong>CCF A</strong>)
     </li>
     <li>
-        Z. Cai, L. Chen, <strong>T. Ling</strong>, et al., "<a href="https://ieeexplore.ieee.org/document/10440128" target="_blank">STO-DARTS: Stochastic Bilevel Optimization for Differentiable Neural Architecture Search</a>", in <em>IEEE Transactions on Emerging Topics in Computational Intelligence  (<strong>TETCI</strong>)</em>, vol. 8, no. 3, pp. 2324-2335, 2024.
+        Z. Cai, L. Chen, <strong>T. Ling</strong>, <em>et al.</em>, "<a href="https://ieeexplore.ieee.org/document/10440128" target="_blank">STO-DARTS: Stochastic Bilevel Optimization for Differentiable Neural Architecture Search</a>", in <em>IEEE Transactions on Emerging Topics in Computational Intelligence  (<strong>TETCI</strong>)</em>, vol. 8, no. 3, pp. 2324-2335, 2024.
     </li>
-</ol>
 
 <h3>
     2023
 </h3>
 
-<ol>
     <li>
-        <strong>T. Ling</strong>, L. Chen, Y. Lai, et al., "<a href="https://link.springer.com/chapter/10.1007/978-3-031-40292-0_23" target="_blank">Evolutionary Verbalizer Search for Prompt-based Few Shot Text Classification</a>", in <em>Proc. KSEM</em>, pp. 279-290, 2023. (<strong>CCF C</strong>)
+        <strong>T. Ling</strong>, L. Chen, Y. Lai, <em>et al.</em>, "<a href="https://link.springer.com/chapter/10.1007/978-3-031-40292-0_23" target="_blank">Evolutionary Verbalizer Search for Prompt-based Few Shot Text Classification</a>", in <em><strong>KSEM</strong></em>, pp. 279-290, 2023. (<strong>CCF C</strong>)
     </li>
     <li>
-        <strong>T. Ling</strong>, L. Chen, H. Sheng, et al., "<a href="https://link.springer.com/chapter/10.1007/978-3-031-46674-8_3" target="_blank">Sentence-level Event Detection without Triggers via Prompt Learning and Machine Reading Comprehension</a>", in <em>Proc. ADMA</em>, pp. 33-46, 2023. (<strong>CCF C</strong>)
+        <strong>T. Ling</strong>, L. Chen, H. Sheng, <em>et al.</em>, "<a href="https://link.springer.com/chapter/10.1007/978-3-031-46674-8_3" target="_blank">Sentence-level Event Detection without Triggers via Prompt Learning and Machine Reading Comprehension</a>", in <em><strong>ADMA</strong></em>, pp. 33-46, 2023. (<strong>CCF C</strong>)
     </li>
     <li>
-        <strong>T. Ling</strong>, L. Chen, C. Liao, et al., "<a href="https://ieeexplore.ieee.org/document/10317451" target="_blank">Improving Aspect Sentiment Classification via Retrieving from Training Data</a>", in <em>Proc. APSIPA ASC</em>, pp. 490-497, 2023. 
+        <strong>T. Ling</strong>, L. Chen, C. Liao, <em>et al.</em>, "<a href="https://ieeexplore.ieee.org/document/10317451" target="_blank">Improving Aspect Sentiment Classification via Retrieving from Training Data</a>", in <em><strong>APSIPA ASC</strong></em>, pp. 490-497, 2023. 
     </li>
     <li>
-        Z. Yu, <strong>T. Ling</strong>, F. Gu, et al., "<a href="https://link.springer.com/chapter/10.1007/978-981-99-8540-1_9" target="_blank">A Pre-trained Model For Chinese Medical Record Punctuation Restoration</a>", in <em>Proc. PRCV</em>, pp. 101-112, 2023. (<strong>CCF C</strong>)
+        Z. Yu, <strong>T. Ling</strong>, F. Gu, <em>et al.</em>, "<a href="https://link.springer.com/chapter/10.1007/978-981-99-8540-1_9" target="_blank">A Pre-trained Model For Chinese Medical Record Punctuation Restoration</a>", in <em><strong>PRCV</strong></em>, pp. 101-112, 2023. (<strong>CCF C</strong>)
     </li>
 </ol>
 
@@ -121,13 +142,24 @@
             Reviewer
             <ul>
                 <li>
-                    Joural: ESWA, TETCI, EAAI
+                    Joural: <strong>ESWA</strong>, <strong>TETCI</strong>, <strong>EAAI</strong>
                 </li>
                 <li>
-                    Conference: IALP
+                    Conference: <strong>IALP</strong>
                 </li>
             </ul>
         </li>
 
     </ul>
 </div>
+
+
+</body>
+</html>
+
+<script>
+const refs = document.querySelectorAll(".references li");
+const ol = document.querySelector(".references");
+
+ol.style.counterReset = "ref " + (refs.length+1);
+</script>
