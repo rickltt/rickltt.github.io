@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hear Naturally — Implicit Enrollment for Real-Time Target Speaker Extraction</title>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#111827; --muted:#667085; --line:#e7eaf0;
+    --soft:#f7f9fc; --blue:#2563eb; --cyan:#06b6d4; --green:#16a34a;
+    --shadow:0 18px 50px rgba(15,23,42,.08);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1060px,calc(100% - 40px));margin:auto}
+  nav{height:70px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(231,234,240,.8);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);z-index:20}
+  .brand{font-weight:800;letter-spacing:-.03em}.navlinks{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+  .hero{text-align:center;padding:82px 0 42px}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid #dbe7ff;background:#f6f9ff;border-radius:999px;color:#2458b8;font-size:13px;font-weight:700}
+  h1{font-size:clamp(42px,6vw,72px);line-height:1.02;letter-spacing:-.055em;margin:22px auto 18px;max-width:940px}
+  .grad{background:linear-gradient(90deg,#2563eb,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subtitle{max-width:790px;margin:0 auto;color:var(--muted);font-size:19px}
+  .authors{margin-top:28px;font-size:15px}.authors a{color:#2458b8}.affil{color:var(--muted);font-size:14px;margin-top:6px}
+  .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .btn{padding:11px 17px;border-radius:10px;border:1px solid var(--line);font-weight:700;font-size:14px;background:#fff}
+  .btn.primary{background:#111827;color:#fff;border-color:#111827}
+  .hero-demo{margin:46px auto 0;background:#0b1220;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:16/9;position:relative}
+  .hero-demo video{width:100%;height:100%;object-fit:cover;background:#0b1220}
+  .placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:radial-gradient(circle at 50% 35%,#21345b,#0b1220 65%)}
+  .play{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-size:28px;padding-left:5px}
+  .placeholder b{font-size:20px;margin-top:18px}.placeholder span{font-size:13px;color:#cbd5e1;margin-top:4px}
+  section{padding:82px 0}.section-kicker{color:var(--blue);font-weight:800;font-size:13px;letter-spacing:.11em;text-transform:uppercase}.section-title{font-size:38px;letter-spacing:-.04em;line-height:1.15;margin:8px 0 14px}.section-desc{color:var(--muted);max-width:720px;margin:0}
+  .compare{display:grid;grid-template-columns:1fr 80px 1fr;gap:20px;align-items:center;margin-top:40px}
+  .card{border:1px solid var(--line);border-radius:18px;padding:28px;background:#fff;box-shadow:0 8px 30px rgba(15,23,42,.04)}
+  .card.bad{background:#fbfbfc}.card.good{border-color:#cfe0ff;background:#f9fbff}.label{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .card h3{font-size:24px;margin:8px 0 10px;letter-spacing:-.03em}.card p{margin:0;color:var(--muted)}
+  .steps{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.step{padding:8px 10px;background:#f0f2f5;border-radius:8px;font-size:13px}.good .step{background:#eaf2ff;color:#194b9b}.arrow{text-align:center;font-size:30px;color:#98a2b3}
+  .pipeline{margin-top:42px;border:1px solid var(--line);border-radius:22px;padding:28px;background:linear-gradient(180deg,#fff,#f9fbfd)}
+  .pipe-grid{display:grid;grid-template-columns:1fr 42px 1.1fr 42px 1fr 42px 1.1fr;gap:10px;align-items:stretch}.node{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff;min-height:150px}.node strong{display:block;font-size:17px}.node small{display:block;color:var(--muted);margin-top:8px}.node.accent{border-color:#bdd1ff;background:#f4f8ff}.node.green{border-color:#bde9c7;background:#f4fbf5}.p-arrow{display:grid;place-items:center;color:#98a2b3;font-size:24px}.mini{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#667085;margin-top:18px}
+  .demos{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:38px}.demo-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}.demo-media{aspect-ratio:16/9;background:#eef2f7;position:relative}.demo-media video{width:100%;height:100%;object-fit:cover}.demo-body{padding:20px}.demo-body h3{margin:0 0 6px;font-size:19px}.demo-body p{margin:0;color:var(--muted);font-size:14px}.tag{display:inline-block;margin-top:14px;padding:5px 9px;background:#f2f4f7;border-radius:999px;font-size:11px;font-weight:700;color:#475467}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}.stat{padding:25px 18px;border:1px solid var(--line);border-radius:16px;text-align:center;background:#fff}.num{font-size:34px;font-weight:850;letter-spacing:-.045em}.stat span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+  .device{display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;margin-top:38px}.device-art{min-height:360px;border-radius:20px;background:linear-gradient(145deg,#eff5ff,#f8fafc);border:1px solid var(--line);display:grid;place-items:center;padding:40px;text-align:center}.device-icon{font-size:78px}.device-copy h3{font-size:29px;letter-spacing:-.04em;margin:0 0 12px}.device-copy p{color:var(--muted)}
+  .quote{padding:36px;border-radius:18px;background:#111827;color:#fff;font-size:24px;letter-spacing:-.025em;line-height:1.45}.quote span{display:block;color:#aeb8c8;font-size:14px;margin-top:16px}
+  footer{border-top:1px solid var(--line);padding:36px 0 60px;color:var(--muted);font-size:13px;text-align:center}
+  @media(max-width:850px){.compare{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.pipe-grid{grid-template-columns:1fr}.p-arrow{transform:rotate(90deg)}.demos,.device{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}}
+  @media(max-width:520px){.wrap{width:min(100% - 24px,1060px)}.hero{padding-top:52px}h1{font-size:43px}.stats{grid-template-columns:1fr}.section-title{font-size:32px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:min(1060px,calc(100% - 40px))"><div class="brand">Speaker Naturally, Enroll Seamlessly</div><div class="navlinks"><a href="#demos">Demos</a><a href="#paper">Paper</a></div></div></nav>
+
+<main>
+<div class="wrap hero">
+  <!-- <div class="eyebrow">🎧 Real-time wearable target speaker extraction</div> -->
+  <h1>Speak Naturally.<br><span class="grad">Enroll Seamlessly.</span></h1>
+  <p class="subtitle">An ultra-low complexity multi-channel target speaker extraction system that enhances a frontal speaker and learns frequency-aware speaker embedding at the same time.</p>
+  <div class="authors">Tongtao Ling<sup>1</sup>, Pengjie Shen<sup>1，2</sup>, Shulin He<sup>1</sup>, Yuxuan Ma<sup>1</sup>, Yue Qiaoe<sup>3</sup>, Fan Fan<sup>3</sup>, and Zhong-Qiu Wang<sup>1</sup> </div>
+  <div class="affil"><sup>1</sup> Southern University of Science and Technology, Shenzhen, China</div>
+  <div class="affil"><sup>2</sup> Inner Mongolia University, Hohhot, China</div>
+  <div class="affil"><sup>3</sup> Huawei Technologies Co., Ltd., Shenzhen, China</div>
+  <!-- <div class="buttons"><a class="btn primary" href="#paper">Paper</a><a class="btn" href="#demos">Demos</a><a class="btn" href="#">Code</a><a class="btn" href="#system">How it works</a></div> -->
+  <!-- <div class="hero-demo">
+    <video controls poster=""></video>
+    <div class="placeholder"><div class="play">▶</div><b>Main Demo Video</b><span>Replace with: main_demo.mp4</span></div>
+  </div> -->
+</div>
+
+<!-- <section id="idea">
+<div class="wrap">
+  <div class="section-kicker">Why implicit enrollment?</div>
+  <h2 class="section-title">No “please record your voice first.”</h2>
+  <p class="section-desc">Conventional TSE asks the user to first obtain a separate enrollment utterance. Our system turns an ordinary face-to-face interaction into the enrollment process itself.</p>
+  <div class="compare">
+    <div class="card bad"><div class="label">Conventional enrollment</div><h3>Extra enrollment step</h3><p>The target speaker records a separate example, ideally clean and isolated, before extraction starts.</p><div class="steps"><span class="step">Record</span><span class="step">Save voiceprint</span><span class="step">Start listening</span></div></div>
+    <div class="arrow">→</div>
+    <div class="card good"><div class="label">Our approach</div><h3>Enrollment happens while listening</h3><p>For a few seconds, the target is in front. Spatial cues enhance the target while a speaker embedding is computed simultaneously.</p><div class="steps"><span class="step">Face target</span><span class="step">Enhance + enroll</span><span class="step">Target can move</span></div></div>
+  </div>
+
+  <div class="pipeline" id="system">
+    <div class="section-kicker">System overview</div>
+    <h2 class="section-title" style="font-size:30px">Enhance once. Learn the voice. Then follow the speaker.</h2>
+    <div class="pipe-grid">
+      <div class="node"><strong>8-channel mixture</strong><small>Target is approximately frontal during a short enrollment period. Interferers may speak from other directions.</small><div class="mini">Yᵉ ∈ C⁸ˣFˣT</div></div>
+      <div class="p-arrow">→</div>
+      <div class="node accent"><strong>Real-time frontal enhancement</strong><small>A causal multi-channel network exploits spatial cues to suppress competing speakers.</small><div class="mini">DNN_enh</div></div>
+      <div class="p-arrow">→</div>
+      <div class="node green"><strong>Frequency-aware voice embedding</strong><small>The enhanced speech is simultaneously converted into a frequency-dependent speaker representation.</small><div class="mini">E ∈ RᴴˣF</div></div>
+      <div class="p-arrow">→</div>
+      <div class="node accent"><strong>Streaming target extraction</strong><small>Once enrolled, extraction is identity-conditioned: the target no longer needs to stay in front.</small><div class="mini">CRM + personal VAD</div></div>
+    </div>
+  </div>
+</div>
+</section> -->
+
+<section id="demos" style="background:var(--soft)">
+<div class="wrap">
+  <!-- <div class="section-kicker">Interactive story</div>
+  <h2 class="section-title">Hear the difference.</h2> -->
+  <!-- <p class="section-desc">I’d organize your demo videos as a sequence instead of a generic gallery, so viewers understand the interaction in under one minute.</p> -->
+  <div class="demos">
+<div class="demo-card">
+    <div class="demo-media">
+        <video controls width="100%" preload="metadata">
+            <source src="https://rickltt.github.io/seamless_tse/demo/demo1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="demo-body">
+        <span class="tag">Demo 1</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-media">
+        <video controls width="100%" preload="metadata">
+          <source src="https://rickltt.github.io/seamless_tse/demo/demo2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="demo-body">
+        <span class="tag">Demo 2</span>
+      </div>
+    </div>
+</div>
+    <!-- <div class="demo-card"><div class="demo-media"><div class="placeholder" style="background:linear-gradient(135deg,#14532d,#0f172a)"><div class="play">▶</div><b>Demo 3 · Target absent</b><span>Personal VAD suppresses non-target speech</span></div></div><div class="demo-body"><h3>Don’t amplify the wrong person</h3><p>When only interferers are speaking, the personal VAD gates the output rather than producing another speaker.</p><span class="tag">TARGET-ABSENT ROBUSTNESS</span></div></div>
+    <div class="demo-card"><div class="demo-media"><div class="placeholder" style="background:linear-gradient(135deg,#3b0764,#0f172a)"><div class="play">▶</div><b>Demo 4 · On-device</b><span>Raspberry Pi 5 + 8-mic wearable prototype</span></div></div><div class="demo-body"><h3>Real-time embedded deployment</h3><p>Show the live web interface, microphone array, earphones, and end-to-end streaming inference on the wearable prototype.</p><span class="tag">REAL-TIME ON DEVICE</span></div></div> -->
+  </div>
+</div>
+</section>
+
+<!-- <section>
+<div class="wrap">
+  <div class="section-kicker">Small enough to wear</div>
+  <h2 class="section-title">Designed for resource-constrained devices.</h2>
+  <div class="stats">
+    <div class="stat"><div class="num">0.12M</div><span>enrollment-stage parameters</span></div>
+    <div class="stat"><div class="num">1.05</div><span>GMAC/s during implicit enrollment</span></div>
+    <div class="stat"><div class="num">0.12M</div><span>streaming extraction parameters</span></div>
+    <div class="stat"><div class="num">1.15</div><span>GMAC/s during streaming extraction</span></div>
+  </div>
+  <div class="device">
+    <div class="device-art"><div><div class="device-icon">🎧</div><h3>Wearable prototype</h3><p style="color:var(--muted);max-width:420px">Replace this panel with your device photo or the combined interface + wearer image.</p></div></div>
+    <div class="device-copy"><h3>10 ms streaming chunks on Raspberry Pi 5</h3><p>The demo page should make deployment visible, not bury it in a table. A short device video plus four complexity numbers tells the story faster than a long implementation paragraph.</p><p>Recommended visual: wearer on the right, web controller UI on the left, with a small “8-mic input → RPi 5 → earphones” caption.</p></div>
+  </div>
+</div>
+</section> -->
+
+<!-- <section id="paper" style="background:var(--soft)">
+<div class="wrap">
+  <div class="quote">“The enrollment interaction is no longer a separate task — it becomes part of the conversation itself.”<span>Core message for the project page</span></div>
+  <div style="text-align:center;margin-top:38px"><h2 class="section-title">Paper & Resources</h2><div class="buttons"><a class="btn primary" href="#">Paper PDF</a><a class="btn" href="#">Code</a><a class="btn" href="#">Audio Samples</a><a class="btn" href="#">Poster</a></div></div>
+</div>
+</section> -->
+</main>
+<footer><div class="wrap">Speak Naturally, Enroll Seamlessly · Demo website </div></footer>
+<script>
+  // Hide placeholder automatically when a video source is added.
+  document.querySelectorAll('.hero-demo video, .demo-media video').forEach(v=>{
+    if(v.querySelector('source') || v.getAttribute('src')) {
+      const p=v.parentElement.querySelector('.placeholder'); if(p) p.style.display='none';
+    }
+  });
+</script>
+</body>
+</html>
