@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Speaker Naturally, Enroll Seamlessly</title>
+<title>Speak Naturally, Enroll Seamlessly</title>
 <style>
   :root{
     --bg:#ffffff; --ink:#111827; --muted:#667085; --line:#e7eaf0;
@@ -49,13 +49,13 @@
 </style>
 </head>
 <body>
-<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:min(1060px,calc(100% - 40px))"><div class="brand">Speaker Naturally, Enroll Seamlessly</div><div class="navlinks"><a href="#demos">Demos</a><a href="#paper">Paper</a></div></div></nav>
+<nav><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:min(1060px,calc(100% - 40px))"><div class="brand">Speak Naturally, Enroll Seamlessly</div><div class="navlinks"><a href="#demos">Demos</a><a href="#paper">Paper</a></div></div></nav>
 
 <main>
 <div class="wrap hero">
   <!-- <div class="eyebrow">🎧 Real-time wearable target speaker extraction</div> -->
-  <h1>Speak Naturally.<br><span class="grad">Enroll Seamlessly.</span></h1>
-  <p class="subtitle">An ultra-low complexity multi-channel target speaker extraction system that enhances a frontal speaker and learns frequency-aware speaker embedding at the same time.</p>
+  <h1>Speak Naturally,<br><span class="grad">Enroll Seamlessly.</span></h1>
+  <p class="subtitle">A seamless speaker enrollment paradigm for multi-channel target speaker extraction.</p>
   <div class="authors">Tongtao Ling<sup>1</sup>, Pengjie Shen<sup>1，2</sup>, Shulin He<sup>1</sup>, Yuxuan Ma<sup>1</sup>, Yue Qiao<sup>3</sup>, Fan Fan<sup>3</sup>, and Zhong-Qiu Wang<sup>1</sup> </div>
   <div class="affil"><sup>1</sup> Southern University of Science and Technology, Shenzhen, China</div>
   <div class="affil"><sup>2</sup> Inner Mongolia University, Hohhot, China</div>
@@ -95,41 +95,66 @@
 </section> -->
 
 <section id="demos" style="background:var(--soft)">
-<div class="wrap">
-  <!-- <div class="section-kicker">Interactive story</div>
-  <h2 class="section-title">Hear the difference.</h2> -->
-  <!-- <p class="section-desc">I’d organize your demo videos as a sequence instead of a generic gallery, so viewers understand the interaction in under one minute.</p> -->
-  <div class="demos">
-<div class="demo-card">
-    <div class="demo-media">
-        <video controls width="100%" preload="metadata">
-            <source src="https://rickltt.github.io/seamless_tse/demo/demo1.mp4" type="video/mp4">
+  <div class="wrap">
+
+    <div class="demos">
+
+      <!-- Demo 1 -->
+      <div class="demo-card">
+        <div class="demo-media">
+          <video controls width="100%" preload="metadata">
+            <source
+              src="https://rickltt.github.io/seamless_tse/demo/demo1.mp4"
+              type="video/mp4">
             Your browser does not support the video tag.
-        </video>
-    </div>
+          </video>
+        </div>
 
-    <div class="demo-body">
-        <span class="tag">Demo 1</span>
-      </div>
-    </div>
-
-    <div class="demo-card">
-      <div class="demo-media">
-        <video controls width="100%" preload="metadata">
-          <source src="https://rickltt.github.io/seamless_tse/demo/demo2.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="demo-body">
+          <span class="tag">Demo 1</span>
+        </div>
       </div>
 
-      <div class="demo-body">
-        <span class="tag">Demo 2</span>
+      <!-- Demo 2 -->
+      <div class="demo-card">
+        <div class="demo-media">
+          <video controls width="100%" preload="metadata">
+            <source
+              src="https://rickltt.github.io/seamless_tse/demo/demo2.mp4"
+              type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="demo-body">
+          <span class="tag">Demo 2</span>
+        </div>
       </div>
+
+      <!-- PDF -->
+      <div class="demo-card">
+        <div class="demo-media">
+          <object
+            data="https://rickltt.github.io/seamless_tse/demo/tse_device.pdf"
+            type="application/pdf"
+            width="100%"
+            height="500px">
+            <p>
+              Your browser cannot display this PDF.
+              <a href="https://rickltt.github.io/seamless_tse/demo/tse_device.pdf">
+                View PDF
+              </a>
+            </p>
+          </object>
+        </div>
+
+        <div class="demo-body">
+          <span class="tag">(a) wearable prototype; (b) web-based control interface.</span>
+        </div>
+      </div>
+
     </div>
-</div>
-    <!-- <div class="demo-card"><div class="demo-media"><div class="placeholder" style="background:linear-gradient(135deg,#14532d,#0f172a)"><div class="play">▶</div><b>Demo 3 · Target absent</b><span>Personal VAD suppresses non-target speech</span></div></div><div class="demo-body"><h3>Don’t amplify the wrong person</h3><p>When only interferers are speaking, the personal VAD gates the output rather than producing another speaker.</p><span class="tag">TARGET-ABSENT ROBUSTNESS</span></div></div>
-    <div class="demo-card"><div class="demo-media"><div class="placeholder" style="background:linear-gradient(135deg,#3b0764,#0f172a)"><div class="play">▶</div><b>Demo 4 · On-device</b><span>Raspberry Pi 5 + 8-mic wearable prototype</span></div></div><div class="demo-body"><h3>Real-time embedded deployment</h3><p>Show the live web interface, microphone array, earphones, and end-to-end streaming inference on the wearable prototype.</p><span class="tag">REAL-TIME ON DEVICE</span></div></div> -->
   </div>
-</div>
 </section>
 
 <!-- <section>
