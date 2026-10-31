@@ -1,27 +1,253 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hello World</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: #333;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tongtao Ling — Ph.D. student at SUSTech. Research in speech separation, target speaker extraction and multimodal speech enhancement." />
+  <title>Tongtao Ling | Academic Homepage</title>
+  <style>
+    :root {
+      --text: #252a32;
+      --muted: #65717e;
+      --link: #245b8a;
+      --line: #e5e9ed;
+      --background: #ffffff;
+      --max-width: 860px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+      font-size: 15.5px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 68px 28px 72px;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      align-items: start;
+      gap: 34px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: -5px 0 13px;
+      font-size: 33px;
+      font-weight: 650;
+      line-height: 1.22;
+      letter-spacing: -0.7px;
+    }
+
+    .intro p { margin: 0 0 13px; }
+    .portrait {
+      display: block;
+      width: 180px;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 5px;
+      background: #f1f3f5;
+    }
+
+    .interests { margin: 12px 0 16px; padding-left: 20px; }
+    .interests li { padding-left: 2px; }
+    .contact { color: var(--muted); font-size: 14.5px; }
+    .contact a { overflow-wrap: anywhere; }
+    .profile-links { margin-top: 9px; font-size: 14.5px; }
+    .profile-links a + a::before {
+      content: "·";
+      color: #9ba4af;
+      margin: 0 11px 0 8px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section { margin-top: 32px; }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: -0.3px;
+    }
+
+    .simple-list { margin: 0; padding-left: 20px; }
+    .simple-list li { margin: 7px 0; padding-left: 3px; }
+
+    .year {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin: 19px 0 9px;
+    }
+    .year:first-of-type { margin-top: 6px; }
+
+    .publication-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .publication-list > li {
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 13px;
+    }
+    .publication-list > li::before {
+      counter-increment: publication -1;
+      content: "[" counter(publication) "]";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 37px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .publication-list em { font-style: italic; }
+    .publication-list strong { font-weight: 650; }
+    .status { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+    .reviewer-list { margin: 0; padding-left: 20px; }
+    .reviewer-list li { margin-bottom: 6px; }
+
+    footer {
+      margin-top: 45px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+      .container { padding: 35px 20px 48px; }
+      .intro { grid-template-columns: 1fr 118px; gap: 18px; }
+      .portrait { width: 118px; height: 148px; }
+      h1 { font-size: 29px; }
+      h2 { font-size: 19px; }
+      .profile-links a + a::before { margin: 0 5px 0 3px; }
+      .publication-list > li { padding-left: 42px; }
+    }
+    @media (max-width: 420px) {
+      .intro { grid-template-columns: 1fr; }
+      .portrait { grid-row: 1; width: 130px; height: 155px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, nihao!</h1>
+  <main class="container">
+    <header class="intro">
+      <div>
+        <h1>Tongtao Ling</h1>
+        <p>
+          I am a Ph.D. student in the
+          <a href="https://cse.sustech.edu.cn/en/" target="_blank" rel="noopener noreferrer">Department of Computer Science and Engineering</a>
+          at <a href="https://sustech.edu.cn/en/" target="_blank" rel="noopener noreferrer">Southern University of Science and Technology (SUSTech)</a>,
+          supervised by Prof. <a href="https://zqwang7.github.io/" target="_blank" rel="noopener noreferrer">Zhong-Qiu Wang</a>.
+        </p>
+        <p>My research interests include:</p>
+        <ul class="interests">
+          <li>Speech Separation</li>
+          <li>Audio-Visual Target Speaker Extraction</li>
+          <li>Multi-Modal Speech Enhancement</li>
+        </ul>
+        <div class="contact">
+          Email: <a href="mailto:lingtongtao@gmail.com">lingtongtao@gmail.com</a> /
+          <a href="mailto:lingtt2025@mail.sustech.edu.cn">lingtt2025@mail.sustech.edu.cn</a>
+        </div>
+        <div class="profile-links">
+          <a href="https://scholar.google.com.hk/citations?hl=zh-CN&amp;user=P5h2nsAAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a><a href="https://www.researchgate.net/profile/Tongtao-Ling" target="_blank" rel="noopener noreferrer">ResearchGate</a><a href="https://github.com/rickltt" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+      <img class="portrait" src="./photo.jpg" alt="Portrait of Tongtao Ling" />
+    </header>
+
+    <section aria-labelledby="education-title">
+      <h2 id="education-title">Education</h2>
+      <ul class="simple-list">
+        <li>Sep. 2025 – Jul. 2029, Ph.D., Southern University of Science and Technology, Shenzhen, China.</li>
+        <li>Sep. 2021 – Jul. 2024, M.E.I., Guangdong University of Technology, Guangzhou, China.</li>
+        <li>Sep. 2016 – Jul. 2021, B.Eng., Guangxi University, Nanning, China.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <ul class="simple-list">
+        <li>Feb. 2025 – Aug. 2025, Research Assistant, Southern University of Science and Technology, Shenzhen, China.</li>
+        <li>Sep. 2024 – Jan. 2025, AI Engineer, Shenzhen Raisound Technologies, Shenzhen, China.</li>
+      </ul>
+    </section>
+
+    <section class="publications" id="publications" aria-labelledby="publications-title">
+      <h2 id="publications-title">Publications</h2>
+
+      <h3 class="year">2027</h3>
+      <ol class="publication-list">
+        <li><strong>T. Ling</strong>, P. Shen, S. He, Y. Ma, Y. Qiao, F. Fan, and Z.-Q. Wang, "Speak Naturally, Enroll Seamlessly: Target Speaker Enrollment and Extraction on Hearables", in <em><strong>ICASSP</strong></em>, 2027. <span class="status">(in submission)</span></li>
+        <li><strong>T. Ling</strong>, Z.-Q. Wang, "TAVA: Temporal Audio-Visual Alignment for Target Speaker Extraction", in <em><strong>ICASSP</strong></em>, 2027. <span class="status">(in submission)</span></li>
+      </ol>
+
+      <h3 class="year">2026</h3>
+      <ol class="publication-list">
+        <li><strong>T. Ling</strong>, Z.-Q. Wang, "<a href="https://arxiv.org/abs/2608.14812" target="_blank" rel="noopener noreferrer">Separate First, Then Associate: A Two-Stage Approach for Real-World Audio-Visual Speech Enhancement</a>", in <em><strong>International Symposium on Chinese Spoken Language Processing (ISCSLP)</strong></em>, 2026.</li>
+        <li><strong>T. Ling</strong>, S. He, Z.-Q. Wang, "<a href="https://www.isca-archive.org/interspeech_2026/ling26_interspeech.html" target="_blank" rel="noopener noreferrer">TGTSE: Token-Guided Target Speaker Extraction with Visual Cue</a>", in <em><strong>Interspeech</strong></em>, pp. 2236–2240, 2026. <span class="status">(CCF B)</span></li>
+        <li><strong>T. Ling</strong>, P. Shen, Z.-Q. Wang, "<a href="https://www.isca-archive.org/chime_2026/ling26_chime.html" target="_blank" rel="noopener noreferrer">The SUSTech AILab System Description for CHiME-9 MCoRec Challenge</a>", in <em><strong>ICASSP Workshop on HSCMA and CHiME</strong></em>, pp. 11–15, 2026.</li>
+        <li><strong>T. Ling</strong>, S. He, P. Shen, Z.-Q. Wang, "<a href="https://ieeexplore.ieee.org/document/11461577" target="_blank" rel="noopener noreferrer">MC-LExt: Multi-Channel Target Speaker Extraction with Onset-Prompted Speaker Conditioning Mechanism</a>", in <em><strong>ICASSP</strong></em>, pp. 18967–18971, 2026. <span class="status">(CCF B)</span></li>
+        <li>Y. Lai, Z. Cai, L. Chen, <strong>T. Ling</strong>, H.-L. Liu, "<a href="https://ieeexplore.ieee.org/document/11421471" target="_blank" rel="noopener noreferrer">LLMENAS: Evolutionary Neural Architecture Search via Large Language Model Guidance</a>", in <em>IEEE Transactions on Evolutionary Computation (<strong>TEVC</strong>)</em>, 2026. <span class="status">(CCF B)</span></li>
+      </ol>
+
+      <h3 class="year">2024</h3>
+      <ol class="publication-list">
+        <li><strong>T. Ling</strong>, L. Chen, Y. Lai, <em>et al.</em>, "<a href="https://www.sciencedirect.com/science/article/abs/pii/S089360802400251X" target="_blank" rel="noopener noreferrer">Span-based Few-shot Event Detection via Aligning External Knowledge</a>", in <em>Neural Networks (<strong>NN</strong>)</em>, vol. 176, pp. 106327, 2024. <span class="status">(CCF B)</span></li>
+        <li><strong>T. Ling</strong>, Y. Lai, L. Chen, <em>et al.</em>, "<a href="https://www.isca-archive.org/interspeech_2024/ling24_interspeech.html" target="_blank" rel="noopener noreferrer">A Small and Fast BERT for Chinese Medical Punctuation Restoration</a>", in <em><strong>Interspeech</strong></em>, pp. 4533–4537, 2024. <span class="status">(CCF B)</span></li>
+        <li>Z. Cai, L. Chen, P. Liu, <strong>T. Ling</strong>, <em>et al.</em>, "<a href="https://ojs.aaai.org/index.php/AAAI/article/view/28993" target="_blank" rel="noopener noreferrer">EG-NAS: Neural Architecture Search with Fast Evolutionary Exploration</a>", in <em><strong>AAAI</strong></em>, pp. 11159–11167, 2024. <span class="status">(CCF A)</span></li>
+        <li>Z. Cai, L. Chen, <strong>T. Ling</strong>, <em>et al.</em>, "<a href="https://ieeexplore.ieee.org/document/10440128" target="_blank" rel="noopener noreferrer">STO-DARTS: Stochastic Bilevel Optimization for Differentiable Neural Architecture Search</a>", in <em>IEEE Transactions on Emerging Topics in Computational Intelligence (<strong>TETCI</strong>)</em>, vol. 8, no. 3, pp. 2324–2335, 2024.</li>
+      </ol>
+
+      <h3 class="year">2023</h3>
+      <ol class="publication-list">
+        <li><strong>T. Ling</strong>, L. Chen, Y. Lai, <em>et al.</em>, "<a href="https://link.springer.com/chapter/10.1007/978-3-031-40292-0_23" target="_blank" rel="noopener noreferrer">Evolutionary Verbalizer Search for Prompt-based Few Shot Text Classification</a>", in <em><strong>KSEM</strong></em>, pp. 279–290, 2023. <span class="status">(CCF C)</span></li>
+        <li><strong>T. Ling</strong>, L. Chen, H. Sheng, <em>et al.</em>, "<a href="https://link.springer.com/chapter/10.1007/978-3-031-46674-8_3" target="_blank" rel="noopener noreferrer">Sentence-level Event Detection without Triggers via Prompt Learning and Machine Reading Comprehension</a>", in <em><strong>ADMA</strong></em>, pp. 33–46, 2023. <span class="status">(CCF C)</span></li>
+        <li><strong>T. Ling</strong>, L. Chen, C. Liao, <em>et al.</em>, "<a href="https://ieeexplore.ieee.org/document/10317451" target="_blank" rel="noopener noreferrer">Improving Aspect Sentiment Classification via Retrieving from Training Data</a>", in <em><strong>APSIPA ASC</strong></em>, pp. 490–497, 2023.</li>
+        <li>Z. Yu, <strong>T. Ling</strong>, F. Gu, <em>et al.</em>, "<a href="https://link.springer.com/chapter/10.1007/978-981-99-8540-1_9" target="_blank" rel="noopener noreferrer">A Pre-trained Model For Chinese Medical Record Punctuation Restoration</a>", in <em><strong>PRCV</strong></em>, pp. 101–112, 2023. <span class="status">(CCF C)</span></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="service-title">
+      <h2 id="service-title">Academic Service</h2>
+      <ul class="reviewer-list">
+        <li><strong>Journal reviewer:</strong> TASLP, ESWA, TETCI, EAAI</li>
+        <li><strong>Conference reviewer:</strong> IALP, ICASSP, Interspeech</li>
+      </ul>
+    </section>
+
+    <footer>© <span id="year">2026</span> Tongtao Ling</footer>
+  </main>
+
+  <script>
+    // Publications keep a continuous, descending number across all years.
+    const publications = document.querySelectorAll('.publication-list > li');
+    document.querySelector('.publications').style.counterReset =
+      `publication ${publications.length + 1}`;
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
